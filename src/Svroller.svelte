@@ -1,0 +1,39 @@
+<script lang="ts">
+  import Svrollbar from './Svrollbar.svelte'
+
+  export let width: string
+  export let height: string
+
+  let viewport: HTMLElement
+  let contents: HTMLElement
+</script>
+
+<style>
+  .wrapper {
+    position: relative;
+  }
+
+  .viewport {
+    position: relative;
+    overflow: scroll;
+    box-sizing: border-box;
+
+    /* hide scrollbar */
+    -ms-overflow-style: none;
+    scrollbar-width: none;
+  }
+
+  .viewport::-webkit-scrollbar {
+    /* hide scrollbar */
+    display: none;
+  }
+</style>
+
+<div class="wrapper" style="width: {width}">
+  <div bind:this={viewport} class="viewport" style="width: {width}; height: {height}">
+    <div bind:this={contents} class="contents">
+      <slot />
+    </div>
+  </div>
+  <Svrollbar {viewport} {contents} />
+</div>
