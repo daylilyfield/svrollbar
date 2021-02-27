@@ -139,13 +139,14 @@ you can do that following way.
 
 you can customize svrollbar style with css variables.
 
-| variable | default |
-| --svrollbar-track-width | 8px |
-| --svrollbar-track-color | initial |
-| --svrollbar-thumb-opacity | 0 |
-| --svrollbar-thumb-width | 8px |
-| --svrollbar-thumb-color | #454545 |
-| --svrollbar-thumb-opacity | 0.5 |
+| variable                  | default |
+| ------------------------- | ------- |
+| --svrollbar-track-width   | 8px     |
+| --svrollbar-track-color   | initial |
+| --svrollbar-thumb-opacity | 0       |
+| --svrollbar-thumb-width   | 8px     |
+| --svrollbar-thumb-color   | #454545 |
+| --svrollbar-thumb-opacity | 0.5     |
 
 ```svelte
 <script lang="ts">

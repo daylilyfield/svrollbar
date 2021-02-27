@@ -2,6 +2,14 @@
   "name": "svrollbar",
   "version": "0.5.0",
   "description": "stylable scrollbar made by svelte",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/daylilyfield/svrollbar"
+  },
+  "homepage": "https://github.com/daylilyfield/svrollbar#readme",
+  "bugs": {
+    "url": "https://github.com/daylilyfield/svrollbar/issues"
+  },
   "author": "daylilyfield",
   "license": "MIT",
   "main": "lib/index.js",
