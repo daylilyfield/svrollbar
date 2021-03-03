@@ -1,9 +1,16 @@
-<script lang="ts">
+<script>
   import { tweened } from 'svelte/motion'
   import { cubicOut } from 'svelte/easing'
 
-  export let viewport: HTMLElement | null = null
-  export let contents: HTMLElement | null = null
+  /**
+   * @type {HTMLElement}
+   */
+  export let viewport
+
+  /**
+   * @type {HTMLElement}
+   */
+  export let contents
 
   $: wholeHeight = viewport?.scrollHeight ?? 0
   $: scrollTop = viewport?.scrollTop ?? 0
@@ -19,7 +26,7 @@
     easing: cubicOut,
   })
 
-  function listen(viewport: HTMLElement) {
+  function listen(viewport) {
     listened?.()
 
     let timer = 0
@@ -49,7 +56,7 @@
     }
   }
 
-  function observe(contents: HTMLElement) {
+  function observe(contents) {
     observed?.()
 
     if (typeof window.ResizeObserver === 'undefined') {

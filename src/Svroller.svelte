@@ -1,11 +1,11 @@
-<script lang="ts">
+<script>
   import Svrollbar from './Svrollbar.svelte'
 
-  export let width: string
-  export let height: string
+  export let width = '10rem'
+  export let height = '10rem'
 
-  let viewport: HTMLElement
-  let contents: HTMLElement
+  let viewport
+  let contents
 </script>
 
 <style>

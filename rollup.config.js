@@ -1,47 +1,13 @@
-import resolve from '@rollup/plugin-node-resolve'
-import commonjs from '@rollup/plugin-commonjs'
-import typescript from '@rollup/plugin-typescript'
 import svelte from 'rollup-plugin-svelte'
-import sveltePreprocess from 'svelte-preprocess'
-import { terser } from 'rollup-plugin-terser'
+import resolve from '@rollup/plugin-node-resolve'
+import sveld from 'sveld'
 import pkg from './package.json'
 
-const production = !process.env.ROLLUP_WATCH
-
-const name = pkg.name
-  .replace(/^(@\S+\/)?(svelte-)?(\S+)/, '$3')
-  .replace(/^\w/, (m) => m.toUpperCase())
-  .replace(/-\w/g, (m) => m[1].toUpperCase())
-
 export default {
-  input: 'src/index.ts',
+  input: 'src/index.js',
   output: [
-    {
-      file: pkg.module,
-      format: 'es',
-      sourcemap: production,
-    },
-    {
-      file: pkg.main,
-      format: 'umd',
-      name,
-      sourcemap: production,
-    },
+    { file: pkg.module, format: 'es' },
+    { file: pkg.main, format: 'umd', name: 'svrollbar' },
   ],
-  plugins: [
-    commonjs(),
-    typescript(),
-    svelte({
-      emitCss: false,
-      dev: !production,
-      preprocess: sveltePreprocess(),
-    }),
-    resolve({
-      dedupe: ['svelte'],
-    }),
-    production && terser(),
-  ],
-  watch: {
-    clearScreen: false,
-  },
+  plugins: [svelte({ emitCss: false }), sveld(), resolve()],
 }
