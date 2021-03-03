@@ -10,7 +10,7 @@ npm install svrollbar
 
 ## examples
 
-example usage is [here](./example).
+example svelte REPL is [here](https://svelte.dev/repl/d600db3bde4742ec8d9751e009d94159?version=3.35.0).
 
 ## how to use
 
@@ -141,11 +141,13 @@ you can customize svrollbar style with css variables.
 
 | variable                  | default |
 | ------------------------- | ------- |
-| --svrollbar-track-width   | 8px     |
+| --svrollbar-track-width   | 10px    |
 | --svrollbar-track-color   | initial |
+| --svrollbar-track-radius  | initial |
 | --svrollbar-thumb-opacity | 0       |
-| --svrollbar-thumb-width   | 8px     |
+| --svrollbar-thumb-width   | 6px     |
 | --svrollbar-thumb-color   | #454545 |
+| --svrollbar-thumb-radius  | 0.25rem |
 | --svrollbar-thumb-opacity | 0.5     |
 
 ```svelte

@@ -83,7 +83,8 @@
     position: absolute;
     top: 0;
     right: 0;
-    width: var(--svrollbar-track-width, 8px);
+    border-radius: var(--svrollbar-track-radius, initial);
+    width: var(--svrollbar-track-width, 10px);
     opacity: var(--svrollbar-track-opacity, 0);
     background-color: var(--svrollbar-track-color, initial);
   }
@@ -91,8 +92,8 @@
   .v-thumb {
     position: relative;
     margin: 0 auto;
-    border-radius: 0.25rem;
-    width: var(--svrollbar-thumb-width, 8px);
+    border-radius: var(--svrollbar-thumb-radius, 0.25rem);
+    width: var(--svrollbar-thumb-width, 6px);
     opacity: var(--svrollbar-thumb-opacity, 0.5);
     background-color: var(--svrollbar-thumb-color, #454545);
   }
