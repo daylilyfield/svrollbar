@@ -12,6 +12,14 @@
    */
   export let contents
 
+  /**
+   * @type {number}
+   */
+  export let visibilityTimeout = 1000
+
+  let vTrack
+  let vThumb
+
   $: wholeHeight = viewport?.scrollHeight ?? 0
   $: scrollTop = viewport?.scrollTop ?? 0
   $: trackHeight = viewport?.offsetHeight ?? 0
@@ -31,28 +39,89 @@
 
     let timer = 0
 
-    const onScroll = () => {
+    let startTop = 0
+    let startY = 0
+
+    const setupTimer = () => {
+      timer = window.setTimeout(() => {
+        opacity.set(0.0)
+      }, visibilityTimeout)
+    }
+
+    const clearTimer = () => {
       if (timer) {
         window.clearTimeout(timer)
         timer = 0
       }
+    }
+
+    const onScroll = () => {
+      clearTimer()
+      setupTimer()
 
       opacity.set(1.0)
+
       scrollTop = viewport?.scrollTop ?? 0
     }
 
-    const onMouseLeave = () => {
-      timer = window.setTimeout(() => {
-        opacity.set(0.0)
-      }, 1000)
+    const onTrackEnter = () => {
+      clearTimer()
+    }
+
+    const onTrackLeave = () => {
+      clearTimer()
+      setupTimer()
+    }
+
+    const onThumbDown = (event) => {
+      event.stopPropagation()
+      event.preventDefault()
+
+      startTop = viewport.scrollTop
+      startY = event.changedTouches ? event.changedTouches[0].clientY : event.clientY
+
+      document.addEventListener('mousemove', onThumbMove)
+      document.addEventListener('touchmove', onThumbMove)
+      document.addEventListener('mouseup', onThumbUp)
+      document.addEventListener('touchend', onThumbUp)
+    }
+
+    const onThumbMove = (event) => {
+      event.stopPropagation()
+      event.preventDefault()
+
+      const clientY = event.changedTouches ? event.changedTouches[0].clientY : event.clientY
+      const ratio = wholeHeight / trackHeight
+
+      viewport.scrollTop = startTop + ratio * (clientY - startY)
+    }
+
+    const onThumbUp = (event) => {
+      event.stopPropagation()
+      event.preventDefault()
+
+      startTop = 0
+      startY = 0
+
+      document.removeEventListener('mousemove', onThumbMove)
+      document.removeEventListener('touchmove', onThumbMove)
+      document.removeEventListener('mouseup', onThumbUp)
+      document.removeEventListener('touchend', onThumbUp)
     }
 
     viewport.addEventListener('scroll', onScroll, { passive: true })
-    viewport.addEventListener('mouseleave', onMouseLeave)
+
+    vTrack.addEventListener('mouseenter', onTrackEnter)
+    vTrack.addEventListener('mouseleave', onTrackLeave)
+
+    vThumb.addEventListener('mousedown', onThumbDown)
+    vThumb.addEventListener('touchstart', onThumbDown)
 
     return () => {
       viewport.removeEventListener('scroll', onScroll)
-      viewport.removeEventListener('mouseleave', onMouseLeave)
+
+      vTrack.removeEventListener('mouseenter', onTrackEnter)
+      vTrack.removeEventListener('mouseleave', onTrackLeave)
     }
   }
 
@@ -99,6 +168,6 @@
   }
 </style>
 
-<div class="v-track" style="height: {trackHeight}px; opacity: {$opacity}">
-  <div class="v-thumb" style="height: {thumbHeight}px; top: {thumbTop}px" />
+<div bind:this={vTrack} class="v-track" style="height: {trackHeight}px; opacity: {$opacity}">
+  <div bind:this={vThumb} class="v-thumb" style="height: {thumbHeight}px; top: {thumbTop}px" />
 </div>

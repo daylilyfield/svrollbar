@@ -11,6 +11,11 @@ export interface SvrollerProps {
    * @default '10rem'
    */
   height?: string;
+
+  /**
+   * @default 1000
+   */
+  visibilityTimeout?: number;
 }
 
 export default class Svroller extends SvelteComponentTyped<

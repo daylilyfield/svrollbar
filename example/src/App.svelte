@@ -2,6 +2,7 @@
   import ExternalViewportExample from './ExternalViewportExample.svelte'
   import SimpleExample from './SimpleExample.svelte'
   import StyledExample from './StyledExample.svelte'
+  import EmptyExample from './EmptyExample.svelte'
   import TinyVirtualListExample from './TinyVirtualListExample.svelte'
 </script>
 
@@ -34,5 +35,10 @@
       <a href="https://github.com/Skayo/svelte-tiny-virtual-list">svelte-tiny-virtual-list</a> Example
     </h2>
     <TinyVirtualListExample />
+  </section>
+
+  <section>
+    <h2>Empty Example</h2>
+    <EmptyExample />
   </section>
 </main>

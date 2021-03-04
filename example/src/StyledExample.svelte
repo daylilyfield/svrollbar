@@ -20,7 +20,7 @@
 </style>
 
 <div class="container">
-  <Svroller width="10rem" height="10rem">
+  <Svroller width="10rem" height="10rem" visibilityTimeout={3000}>
     {#each items as item (item)}
       <div>{item}</div>
     {/each}

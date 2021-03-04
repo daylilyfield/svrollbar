@@ -15,7 +15,7 @@ example svelte REPL is [here](https://svelte.dev/repl/d600db3bde4742ec8d9751e009
 ## how to use
 
 svrollbar has two components; `Svrollbar.svelte` and `Svroller.svelte`.  
-If you would like to make things simpler, you may prefer `Svroller.svelte`.
+if you would like to make things simpler, you may prefer `Svroller.svelte`.
 
 ```svelte
 <script lang="ts">
@@ -88,7 +88,7 @@ implemenation such as
 [svelte-virtual-list](https://github.com/sveltejs/svelte-virtual-list)
 or
 [svelte-tiny-virtual-list](https://github.com/Skayo/svelte-tiny-virtual-list),
-you can do that following way.
+you can do that in the following way.
 
 ```svelte
 <script lang="ts">
@@ -184,6 +184,7 @@ you can customize svrollbar style with css variables.
 ## todos
 
 - [ ] always visible scrollbar
-- [ ] scrollbar fade timeout
+- [x] scrollbar fade timeout
 - [ ] horizontal scroll support
 - [ ] drop shadow support
+- [x] drag scrollbar to scroll

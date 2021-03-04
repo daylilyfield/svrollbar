@@ -3,6 +3,7 @@
 
   export let width = '10rem'
   export let height = '10rem'
+  export let visibilityTimeout = 1000
 
   let viewport
   let contents
@@ -35,5 +36,5 @@
       <slot />
     </div>
   </div>
-  <Svrollbar {viewport} {contents} />
+  <Svrollbar {viewport} {contents} {visibilityTimeout} />
 </div>
