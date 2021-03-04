@@ -187,4 +187,4 @@ you can customize svrollbar style with css variables.
 - [x] scrollbar fade timeout
 - [ ] horizontal scroll support
 - [ ] drop shadow support
-- [x] drag scrollbar to scroll
+- [x] draggable thumb to scroll
