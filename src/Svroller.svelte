@@ -1,9 +1,19 @@
 <script>
+  import { fade } from 'svelte/transition'
   import Svrollbar from './Svrollbar.svelte'
 
   export let width = '10rem'
   export let height = '10rem'
-  export let visibilityTimeout = 1000
+  export let hideAfter = 1000
+
+  /**
+   * @type {(node: HTMLElement, params: any) => svelte.TransitionConfig}
+   */
+  export let transitionIn = (node) => fade(node, { duration: 100 })
+  /**
+   * @type {(node: HTMLElement, params: any) => svelte.TransitionConfig}
+   */
+  export let transitionOut = (node) => fade(node, { duration: 300 })
 
   let viewport
   let contents
@@ -36,5 +46,5 @@
       <slot />
     </div>
   </div>
-  <Svrollbar {viewport} {contents} {visibilityTimeout} />
+  <Svrollbar {viewport} {contents} {hideAfter} {transitionIn} {transitionOut} on:show on:hide />
 </div>

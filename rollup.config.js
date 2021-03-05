@@ -9,5 +9,12 @@ export default {
     { file: pkg.module, format: 'es' },
     { file: pkg.main, format: 'umd', name: 'svrollbar' },
   ],
-  plugins: [svelte({ emitCss: false }), sveld(), resolve()],
+  plugins: [
+    svelte({ emitCss: false }),
+    resolve(),
+    sveld({
+      markdown: true,
+      json: true,
+    }),
+  ],
 }

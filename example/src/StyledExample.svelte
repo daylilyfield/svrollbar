@@ -10,17 +10,17 @@
     width: 10rem;
 
     --svrollbar-track-width: 20px;
-    --svrollbar-track-color: #85b4b9;
-    --svrollbar-thumb-opacity: 0;
+    --svrollbar-track-background: #85b4b9;
+    --svrollbar-track-opacity: 1;
 
     --svrollbar-thumb-width: 10px;
-    --svrollbar-thumb-color: #d9ab55;
+    --svrollbar-thumb-background: #d9ab55;
     --svrollbar-thumb-opacity: 1;
   }
 </style>
 
 <div class="container">
-  <Svroller width="10rem" height="10rem" visibilityTimeout={3000}>
+  <Svroller width="10rem" height="10rem" hideAfter={3000}>
     {#each items as item (item)}
       <div>{item}</div>
     {/each}

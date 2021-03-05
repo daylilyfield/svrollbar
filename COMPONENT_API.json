@@ -1,0 +1,117 @@
+{
+  "total": 2,
+  "components": [
+    {
+      "moduleName": "Svrollbar",
+      "filePath": "src/Svrollbar.svelte",
+      "props": [
+        {
+          "name": "viewport",
+          "kind": "let",
+          "type": "HTMLElement",
+          "isFunction": false,
+          "constant": false,
+          "reactive": false
+        },
+        {
+          "name": "contents",
+          "kind": "let",
+          "type": "HTMLElement",
+          "isFunction": false,
+          "constant": false,
+          "reactive": false
+        },
+        {
+          "name": "hideAfter",
+          "kind": "let",
+          "type": "number",
+          "value": "1000",
+          "isFunction": false,
+          "constant": false,
+          "reactive": false
+        },
+        {
+          "name": "transitionIn",
+          "kind": "let",
+          "type": "(node: HTMLElement, params: any) => svelte.TransitionConfig",
+          "value": "(node) => fade(node, { duration: 100 })",
+          "isFunction": true,
+          "constant": false,
+          "reactive": false
+        },
+        {
+          "name": "transitionOut",
+          "kind": "let",
+          "type": "(node: HTMLElement, params: any) => svelte.TransitionConfig",
+          "value": "(node) => fade(node, { duration: 300 })",
+          "isFunction": true,
+          "constant": false,
+          "reactive": false
+        }
+      ],
+      "slots": [],
+      "events": [
+        { "type": "dispatched", "name": "show" },
+        { "type": "dispatched", "name": "hide" }
+      ],
+      "typedefs": []
+    },
+    {
+      "moduleName": "Svroller",
+      "filePath": "src/Svroller.svelte",
+      "props": [
+        {
+          "name": "width",
+          "kind": "let",
+          "type": "string",
+          "value": "'10rem'",
+          "isFunction": false,
+          "constant": false,
+          "reactive": false
+        },
+        {
+          "name": "height",
+          "kind": "let",
+          "type": "string",
+          "value": "'10rem'",
+          "isFunction": false,
+          "constant": false,
+          "reactive": false
+        },
+        {
+          "name": "hideAfter",
+          "kind": "let",
+          "type": "number",
+          "value": "1000",
+          "isFunction": false,
+          "constant": false,
+          "reactive": false
+        },
+        {
+          "name": "transitionIn",
+          "kind": "let",
+          "type": "(node: HTMLElement, params: any) => svelte.TransitionConfig",
+          "value": "(node) => fade(node, { duration: 100 })",
+          "isFunction": true,
+          "constant": false,
+          "reactive": false
+        },
+        {
+          "name": "transitionOut",
+          "kind": "let",
+          "type": "(node: HTMLElement, params: any) => svelte.TransitionConfig",
+          "value": "(node) => fade(node, { duration: 300 })",
+          "isFunction": true,
+          "constant": false,
+          "reactive": false
+        }
+      ],
+      "slots": [{ "name": "__default__", "default": true, "slot_props": "{}" }],
+      "events": [
+        { "type": "forwarded", "name": "show", "element": "Svrollbar" },
+        { "type": "forwarded", "name": "hide", "element": "Svrollbar" }
+      ],
+      "typedefs": []
+    }
+  ]
+}

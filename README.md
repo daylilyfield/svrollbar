@@ -135,20 +135,24 @@ you can do that in the following way.
 </div>
 ```
 
+## components spec
+
+see [here](./COMPONENT_INDEX.md).
+
 ## how to customize
 
 you can customize svrollbar style with css variables.
 
-| variable                  | default |
-| ------------------------- | ------- |
-| --svrollbar-track-width   | 10px    |
-| --svrollbar-track-color   | initial |
-| --svrollbar-track-radius  | initial |
-| --svrollbar-thumb-opacity | 0       |
-| --svrollbar-thumb-width   | 6px     |
-| --svrollbar-thumb-color   | #454545 |
-| --svrollbar-thumb-radius  | 0.25rem |
-| --svrollbar-thumb-opacity | 0.5     |
+| variable                     | default |
+| ---------------------------- | ------- |
+| --svrollbar-track-width      | 10px    |
+| --svrollbar-track-background | initial |
+| --svrollbar-track-radius     | initial |
+| --svrollbar-track-opacity    | 1       |
+| --svrollbar-thumb-width      | 6px     |
+| --svrollbar-thumb-background | gray    |
+| --svrollbar-thumb-radius     | 0.25rem |
+| --svrollbar-thumb-opacity    | 0.5     |
 
 ```svelte
 <script lang="ts">
@@ -163,11 +167,11 @@ you can customize svrollbar style with css variables.
     width: 10rem;
 
     --svrollbar-track-width: 20px;
-    --svrollbar-track-color: #85b4b9;
-    --svrollbar-thumb-opacity: 0;
+    --svrollbar-track-background: #85b4b9;
+    --svrollbar-track-opacity: 1;
 
     --svrollbar-thumb-width: 10px;
-    --svrollbar-thumb-color: #d9ab55;
+    --svrollbar-thumb-background: #d9ab55;
     --svrollbar-thumb-opacity: 1;
   }
 </style>
@@ -188,3 +192,4 @@ you can customize svrollbar style with css variables.
 - [ ] horizontal scroll support
 - [ ] drop shadow support
 - [x] draggable thumb to scroll
+- [x] scrollbar show/hide animation
