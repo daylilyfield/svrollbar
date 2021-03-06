@@ -139,7 +139,36 @@ you can do that in the following way.
 
 see [here](./COMPONENT_INDEX.md).
 
-## how to customize
+## how to customize animation
+
+since the simple fade animation is realy a bore,
+you can replace the default fade (show/hide) animation with your one.
+the animation function is compatible with svelte transition animation.
+
+```svelte
+<script>
+  import { fly } from 'svelte/transition'
+  import { Svroller } from 'svrollbar'
+
+  const items = Array.from({ length: 50 }).map((_, i) => `item ${i}`)
+  const flyLeft = (node) => fly(node, { x: -160 })
+  const flyRight = (node) => fly(node, { x: 30 })
+</script>
+
+<Svroller
+  width="10rem"
+  height="10rem"
+  vTrackIn={flyLeft}
+  vTrackOut={flyLeft}
+  vThumbIn={flyRight}
+  vThumbOut={flyRight}>
+  {#each items as item (item)}
+    <div>{item}</div>
+  {/each}
+</Svroller>
+```
+
+## how to customize style
 
 you can customize svrollbar style with css variables.
 
