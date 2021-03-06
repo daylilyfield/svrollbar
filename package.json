@@ -1,6 +1,6 @@
 {
   "name": "svrollbar",
-  "version": "0.8.0",
+  "version": "0.8.1",
   "description": "stylable scrollbar made by svelte",
   "repository": {
     "type": "git",
