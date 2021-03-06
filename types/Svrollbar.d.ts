@@ -14,12 +14,22 @@ export interface SvrollbarProps {
   /**
    * @default (node) => fade(node, { duration: 100 })
    */
-  transitionIn?: (node: HTMLElement, params: any) => svelte.TransitionConfig;
+  vTrackIn?: (node: HTMLElement, params: any) => svelte.TransitionConfig;
 
   /**
    * @default (node) => fade(node, { duration: 300 })
    */
-  transitionOut?: (node: HTMLElement, params: any) => svelte.TransitionConfig;
+  vTrackOut?: (node: HTMLElement, params: any) => svelte.TransitionConfig;
+
+  /**
+   * @default (node) => fade(node, { duration: 100 })
+   */
+  vThumbIn?: (node: HTMLElement, params: any) => svelte.TransitionConfig;
+
+  /**
+   * @default (node) => fade(node, { duration: 300 })
+   */
+  vThumbOut?: (node: HTMLElement, params: any) => svelte.TransitionConfig;
 }
 
 export default class Svrollbar extends SvelteComponentTyped<

@@ -31,7 +31,7 @@
           "reactive": false
         },
         {
-          "name": "transitionIn",
+          "name": "vTrackIn",
           "kind": "let",
           "type": "(node: HTMLElement, params: any) => svelte.TransitionConfig",
           "value": "(node) => fade(node, { duration: 100 })",
@@ -40,7 +40,25 @@
           "reactive": false
         },
         {
-          "name": "transitionOut",
+          "name": "vTrackOut",
+          "kind": "let",
+          "type": "(node: HTMLElement, params: any) => svelte.TransitionConfig",
+          "value": "(node) => fade(node, { duration: 300 })",
+          "isFunction": true,
+          "constant": false,
+          "reactive": false
+        },
+        {
+          "name": "vThumbIn",
+          "kind": "let",
+          "type": "(node: HTMLElement, params: any) => svelte.TransitionConfig",
+          "value": "(node) => fade(node, { duration: 100 })",
+          "isFunction": true,
+          "constant": false,
+          "reactive": false
+        },
+        {
+          "name": "vThumbOut",
           "kind": "let",
           "type": "(node: HTMLElement, params: any) => svelte.TransitionConfig",
           "value": "(node) => fade(node, { duration: 300 })",
@@ -88,7 +106,7 @@
           "reactive": false
         },
         {
-          "name": "transitionIn",
+          "name": "vTrackIn",
           "kind": "let",
           "type": "(node: HTMLElement, params: any) => svelte.TransitionConfig",
           "value": "(node) => fade(node, { duration: 100 })",
@@ -97,7 +115,25 @@
           "reactive": false
         },
         {
-          "name": "transitionOut",
+          "name": "vTrackOut",
+          "kind": "let",
+          "type": "(node: HTMLElement, params: any) => svelte.TransitionConfig",
+          "value": "(node) => fade(node, { duration: 300 })",
+          "isFunction": true,
+          "constant": false,
+          "reactive": false
+        },
+        {
+          "name": "vThumbIn",
+          "kind": "let",
+          "type": "(node: HTMLElement, params: any) => svelte.TransitionConfig",
+          "value": "(node) => fade(node, { duration: 100 })",
+          "isFunction": true,
+          "constant": false,
+          "reactive": false
+        },
+        {
+          "name": "vThumbOut",
           "kind": "let",
           "type": "(node: HTMLElement, params: any) => svelte.TransitionConfig",
           "value": "(node) => fade(node, { duration: 300 })",
