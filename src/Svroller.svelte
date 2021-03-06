@@ -9,11 +9,20 @@
   /**
    * @type {(node: HTMLElement, params: any) => svelte.TransitionConfig}
    */
-  export let transitionIn = (node) => fade(node, { duration: 100 })
+  export let vTrackIn = (node) => fade(node, { duration: 100 })
   /**
    * @type {(node: HTMLElement, params: any) => svelte.TransitionConfig}
    */
-  export let transitionOut = (node) => fade(node, { duration: 300 })
+  export let vTrackOut = (node) => fade(node, { duration: 300 })
+
+  /**
+   * @type {(node: HTMLElement, params: any) => svelte.TransitionConfig}
+   */
+  export let vThumbIn = (node) => fade(node, { duration: 100 })
+  /**
+   * @type {(node: HTMLElement, params: any) => svelte.TransitionConfig}
+   */
+  export let vThumbOut = (node) => fade(node, { duration: 300 })
 
   let viewport
   let contents
@@ -46,5 +55,14 @@
       <slot />
     </div>
   </div>
-  <Svrollbar {viewport} {contents} {hideAfter} {transitionIn} {transitionOut} on:show on:hide />
+  <Svrollbar
+    {viewport}
+    {contents}
+    {hideAfter}
+    {vTrackIn}
+    {vTrackOut}
+    {vThumbIn}
+    {vThumbOut}
+    on:show
+    on:hide />
 </div>

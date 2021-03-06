@@ -1,7 +1,10 @@
 <script lang="ts">
+  import { fly } from 'svelte/transition'
   import { Svroller } from '../../src/index'
 
   const items = Array.from({ length: 50 }).map((_, i) => `item ${i}`)
+  const flyLeft = (node: HTMLElement) => fly(node, { x: -160 })
+  const flyRight = (node: HTMLElement) => fly(node, { x: 30 })
 </script>
 
 <style>
@@ -20,7 +23,14 @@
 </style>
 
 <div class="container">
-  <Svroller width="10rem" height="10rem" hideAfter={3000}>
+  <Svroller
+    width="10rem"
+    height="10rem"
+    hideAfter={1000}
+    vTrackIn={flyLeft}
+    vTrackOut={flyLeft}
+    vThumbIn={flyRight}
+    vThumbOut={flyRight}>
     {#each items as item (item)}
       <div>{item}</div>
     {/each}

@@ -22,11 +22,20 @@
   /**
    * @type {(node: HTMLElement, params: any) => svelte.TransitionConfig}
    */
-  export let transitionIn = (node) => fade(node, { duration: 100 })
+  export let vTrackIn = (node) => fade(node, { duration: 100 })
   /**
    * @type {(node: HTMLElement, params: any) => svelte.TransitionConfig}
    */
-  export let transitionOut = (node) => fade(node, { duration: 300 })
+  export let vTrackOut = (node) => fade(node, { duration: 300 })
+
+  /**
+   * @type {(node: HTMLElement, params: any) => svelte.TransitionConfig}
+   */
+  export let vThumbIn = (node) => fade(node, { duration: 100 })
+  /**
+   * @type {(node: HTMLElement, params: any) => svelte.TransitionConfig}
+   */
+  export let vThumbOut = (node) => fade(node, { duration: 300 })
 
   /**
    * @event show
@@ -193,6 +202,13 @@
 </script>
 
 <style>
+  .v-scrollbar {
+    position: absolute;
+    top: 0;
+    right: 0;
+    width: var(--svrollbar-track-width, 10px);
+  }
+
   .v-track {
     position: absolute;
     top: 0;
@@ -214,12 +230,18 @@
 </style>
 
 {#if visible}
-  <div
-    bind:this={vTrack}
-    class="v-track"
-    style="height: {trackHeight}px"
-    in:transitionIn
-    out:transitionOut>
-    <div bind:this={vThumb} class="v-thumb" style="height: {thumbHeight}px; top: {thumbTop}px" />
+  <div class="v-scrollbar" style="height: {trackHeight}px">
+    <div
+      bind:this={vTrack}
+      class="v-track"
+      style="height: {trackHeight}px"
+      in:vTrackIn
+      out:vTrackOut />
+    <div
+      bind:this={vThumb}
+      class="v-thumb"
+      style="height: {thumbHeight}px; top: {thumbTop}px"
+      in:vThumbIn
+      out:vThumbOut />
   </div>
 {/if}
