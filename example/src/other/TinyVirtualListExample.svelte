@@ -29,12 +29,17 @@
   .wrapper {
     position: relative;
   }
+
+  .item {
+    font-size: 0.8rem;
+    padding: 0.25rem 0.5rem;
+  }
 </style>
 
 <div class="wrapper">
   <Svrollbar {viewport} {contents} />
-  <VirtualList width="20rem" height={320} itemCount={data.length} itemSize={16}>
-    <div slot="item" let:index let:style {style}>
+  <VirtualList width="20rem" height={320} itemCount={data.length} itemSize={22}>
+    <div slot="item" class="item" let:index let:style {style}>
       {data[index]}
     </div>
   </VirtualList>

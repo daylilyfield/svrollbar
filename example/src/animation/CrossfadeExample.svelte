@@ -37,11 +37,16 @@
     justify-content: center;
     align-items: center;
     position: absolute;
-    bottom: 0.25rem;
-    right: 0.25rem;
+    bottom: 0.5rem;
+    right: 0.5rem;
     margin: 0;
     color: white;
     box-shadow: 2px 2px 4px rgba(0, 0, 0, 0.4);
+  }
+
+  .item {
+    font-size: 0.8rem;
+    padding: 0.25rem 0.5rem;
   }
 </style>
 
@@ -55,7 +60,7 @@
     {vThumbIn}
     {vThumbOut}>
     {#each data as d (d)}
-      <div>{d}</div>
+      <div class="item">{d}</div>
     {/each}
   </Svroller>
   {#if visible}
