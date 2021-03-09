@@ -148,10 +148,10 @@
 </style>
 
 <main>
-  <button class="github">
+  <a href="https://github.com/daylilyfield/svrollbar" class="github" target="_blank">
     <img src="./assets/GitHub-Mark-Light-120px-plus.png" alt="github logo" />
     View on GitHub
-  </button>
+  </a>
 
   <div class="hero">
     <Svroller width="26rem" height="6rem" alwaysVisible={true}>

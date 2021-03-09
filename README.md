@@ -10,6 +10,8 @@ npm install svrollbar
 
 ## examples
 
+example website is [here](https://daylilyfield.github.io/svrollbar/)
+
 example svelte REPL is [here](https://svelte.dev/repl/d600db3bde4742ec8d9751e009d94159?version=3.35.0).
 
 ## how to use
