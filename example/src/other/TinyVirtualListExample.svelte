@@ -1,9 +1,9 @@
 <script lang="ts">
   import { onMount } from 'svelte'
   import VirtualList from 'svelte-tiny-virtual-list'
-  import { Svrollbar } from '../../src'
+  import { Svrollbar } from '../../../src'
 
-  const items = Array.from({ length: 50 }).map((_, i) => `item ${i}`)
+  export let data: string[]
 
   let viewport: HTMLElement
   let contents: HTMLElement
@@ -28,15 +28,14 @@
 
   .wrapper {
     position: relative;
-    width: 10rem;
   }
 </style>
 
 <div class="wrapper">
   <Svrollbar {viewport} {contents} />
-  <VirtualList width="10rem" height={160} itemCount={items.length} itemSize={16}>
+  <VirtualList width="20rem" height={320} itemCount={data.length} itemSize={16}>
     <div slot="item" let:index let:style {style}>
-      {items[index]}
+      {data[index]}
     </div>
   </VirtualList>
 </div>

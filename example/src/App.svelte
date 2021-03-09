@@ -1,14 +1,39 @@
 <script>
-  import ExternalViewportExample from './ExternalViewportExample.svelte'
-  import SimpleExample from './SimpleExample.svelte'
-  import StyledExample from './StyledExample.svelte'
   import EmptyExample from './EmptyExample.svelte'
-  import TinyVirtualListExample from './TinyVirtualListExample.svelte'
+  import characters from './characters'
+  import DefaultExample from './simple/DefaultExample.svelte'
+  import AndroidLikeExample from './simple/AndroidLikeExample.svelte'
+  import Example from './Example.svelte'
+  import WindowsLikeExample from './simple/WindowsLikeExample.svelte'
+  import ColoredExample from './style/ColoredExample.svelte'
+  import GradationThumbExample from './style/GradationThumbExample.svelte'
+  import GradationTrackExample from './style/GradationTrackExample.svelte'
+  import FlyExample from './animation/FlyExample.svelte'
+  import CrossfadeExample from './animation/CrossfadeExample.svelte'
+  import ScaleExample from './animation/ScaleExample.svelte'
+  import ExternalViewportExample from './other/ExternalViewportExample.svelte'
+  import TinyVirtualListExample from './other/TinyVirtualListExample.svelte'
+
+  const data = characters
 </script>
 
 <style>
   main {
     padding: 2rem;
+    background-color: whitesmoke;
+  }
+
+  h1 {
+  }
+
+  h2 {
+    margin-top: 1rem;
+  }
+
+  section > div {
+    display: flex;
+    justify-content: space-around;
+    flex-wrap: wrap;
   }
 </style>
 
@@ -17,28 +42,58 @@
 
   <section>
     <h2>Simple Example</h2>
-    <SimpleExample />
+    <div>
+      <Example>
+        <DefaultExample {data} />
+      </Example>
+      <Example>
+        <AndroidLikeExample {data} />
+      </Example>
+      <Example>
+        <WindowsLikeExample {data} />
+      </Example>
+    </div>
   </section>
 
   <section>
-    <h2>Styled Example</h2>
-    <StyledExample />
+    <h2>Style Example</h2>
+    <div>
+      <Example>
+        <ColoredExample {data} />
+      </Example>
+      <Example>
+        <GradationThumbExample {data} />
+      </Example>
+      <Example>
+        <GradationTrackExample {data} />
+      </Example>
+    </div>
+  </section>
+
+  <section>
+    <h2>Animation Example</h2>
+    <div>
+      <Example>
+        <FlyExample {data} />
+      </Example>
+      <Example>
+        <CrossfadeExample {data} />
+      </Example>
+      <Example>
+        <ScaleExample {data} />
+      </Example>
+    </div>
   </section>
 
   <section>
     <h2>External Viewport Example</h2>
-    <ExternalViewportExample />
-  </section>
-
-  <section>
-    <h2>
-      <a href="https://github.com/Skayo/svelte-tiny-virtual-list">svelte-tiny-virtual-list</a> Example
-    </h2>
-    <TinyVirtualListExample />
-  </section>
-
-  <section>
-    <h2>Empty Example</h2>
-    <EmptyExample />
+    <div>
+      <Example>
+        <ExternalViewportExample {data} />
+      </Example>
+      <Example>
+        <TinyVirtualListExample {data} />
+      </Example>
+    </div>
   </section>
 </main>

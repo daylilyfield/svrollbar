@@ -1,7 +1,5 @@
 <script>
   import { fade } from 'svelte/transition'
-  import { tweened } from 'svelte/motion'
-  import { cubicOut } from 'svelte/easing'
   import { createEventDispatcher } from 'svelte'
 
   /**
@@ -18,6 +16,11 @@
    * @type {number}
    */
   export let hideAfter = 1000
+
+  /**
+   * @type {boolean}
+   */
+  export let alwaysVisible = false
 
   /**
    * @type {(node: HTMLElement, params: any) => svelte.TransitionConfig}
@@ -49,7 +52,7 @@
   let startTop = 0
   let startY = 0
   let timer = 0
-  let visible = false
+  let visible = alwaysVisible
 
   $: teardownViewport = setupViewport(viewport)
   $: teardownContents = setupContents(contents)
@@ -61,11 +64,6 @@
   $: trackHeight = viewport?.offsetHeight ?? 0
   $: thumbHeight = (trackHeight / wholeHeight) * trackHeight ?? 0
   $: thumbTop = (scrollTop / wholeHeight) * trackHeight ?? 0
-
-  const opacity = tweened(0.0, {
-    duration: 300,
-    easing: cubicOut,
-  })
 
   function setupViewport(viewport) {
     if (!viewport) return
@@ -131,8 +129,7 @@
 
   function setupTimer() {
     timer = window.setTimeout(() => {
-      opacity.set(0.0)
-      visible = false
+      visible = alwaysVisible || false
       dispatch('hide')
     }, hideAfter)
   }
@@ -148,8 +145,7 @@
     clearTimer()
     setupTimer()
 
-    opacity.set(1.0)
-    visible = true
+    visible = alwaysVisible || true
     scrollTop = viewport?.scrollTop ?? 0
 
     dispatch('show')
@@ -216,7 +212,8 @@
     border-radius: var(--svrollbar-track-radius, initial);
     width: var(--svrollbar-track-width, 10px);
     opacity: var(--svrollbar-track-opacity, 1);
-    background-color: var(--svrollbar-track-background, initial);
+    background: var(--svrollbar-track-background, initial);
+    box-shadow: var(--svrollbar-track-shadow, initial);
   }
 
   .v-thumb {
@@ -225,7 +222,8 @@
     border-radius: var(--svrollbar-thumb-radius, 0.25rem);
     width: var(--svrollbar-thumb-width, 6px);
     opacity: var(--svrollbar-thumb-opacity, 0.5);
-    background-color: var(--svrollbar-thumb-background, gray);
+    background: var(--svrollbar-thumb-background, gray);
+    box-shadow: var(--svrollbar-thumb-shadow, initial);
   }
 </style>
 

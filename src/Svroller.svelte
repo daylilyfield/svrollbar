@@ -4,7 +4,13 @@
 
   export let width = '10rem'
   export let height = '10rem'
+
   export let hideAfter = 1000
+
+  /**
+   * @type {boolean}
+   */
+  export let alwaysVisible = false
 
   /**
    * @type {(node: HTMLElement, params: any) => svelte.TransitionConfig}
@@ -59,6 +65,7 @@
     {viewport}
     {contents}
     {hideAfter}
+    {alwaysVisible}
     {vTrackIn}
     {vTrackOut}
     {vThumbIn}

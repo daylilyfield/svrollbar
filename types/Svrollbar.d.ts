@@ -12,6 +12,11 @@ export interface SvrollbarProps {
   hideAfter?: number;
 
   /**
+   * @default false
+   */
+  alwaysVisible?: boolean;
+
+  /**
    * @default (node) => fade(node, { duration: 100 })
    */
   vTrackIn?: (node: HTMLElement, params: any) => svelte.TransitionConfig;

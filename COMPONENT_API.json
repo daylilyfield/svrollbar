@@ -31,6 +31,15 @@
           "reactive": false
         },
         {
+          "name": "alwaysVisible",
+          "kind": "let",
+          "type": "boolean",
+          "value": "false",
+          "isFunction": false,
+          "constant": false,
+          "reactive": false
+        },
+        {
           "name": "vTrackIn",
           "kind": "let",
           "type": "(node: HTMLElement, params: any) => svelte.TransitionConfig",
@@ -101,6 +110,15 @@
           "kind": "let",
           "type": "number",
           "value": "1000",
+          "isFunction": false,
+          "constant": false,
+          "reactive": false
+        },
+        {
+          "name": "alwaysVisible",
+          "kind": "let",
+          "type": "boolean",
+          "value": "false",
           "isFunction": false,
           "constant": false,
           "reactive": false

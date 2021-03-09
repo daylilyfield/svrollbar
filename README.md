@@ -139,11 +139,11 @@ you can do that in the following way.
 
 see [here](./COMPONENT_INDEX.md).
 
-## how to customize animation
+## how to customize transition
 
 since the simple fade animation is realy a bore,
 you can replace the default fade (show/hide) animation with your one.
-the animation function is compatible with svelte transition animation.
+the transition function is compatible with the svelte transition.
 
 ```svelte
 <script>
@@ -178,10 +178,12 @@ you can customize svrollbar style with css variables.
 | --svrollbar-track-background | initial |
 | --svrollbar-track-radius     | initial |
 | --svrollbar-track-opacity    | 1       |
+| --svrollbar-track-shadow     | initial |
 | --svrollbar-thumb-width      | 6px     |
 | --svrollbar-thumb-background | gray    |
 | --svrollbar-thumb-radius     | 0.25rem |
 | --svrollbar-thumb-opacity    | 0.5     |
+| --svrollbar-thumb-shadow     | initial |
 
 ```svelte
 <script lang="ts">
@@ -216,9 +218,9 @@ you can customize svrollbar style with css variables.
 
 ## todos
 
-- [ ] always visible scrollbar
+- [x] always visible scrollbar
 - [x] scrollbar fade timeout
 - [ ] horizontal scroll support
-- [ ] drop shadow support
+- [x] drop shadow support
 - [x] draggable thumb to scroll
 - [x] scrollbar show/hide animation
