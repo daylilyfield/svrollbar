@@ -144,7 +144,7 @@
   function onScroll() {
     clearTimer()
     setupTimer()
-    debugger
+
     visible = alwaysVisible || true
     scrollTop = viewport?.scrollTop ?? 0
 

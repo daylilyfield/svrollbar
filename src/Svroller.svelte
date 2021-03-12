@@ -55,7 +55,7 @@
   }
 </style>
 
-<div class="wrapper" style="width: {width}">
+<div class="wrapper" style="width: {width}; height: {height}">
   <div bind:this={viewport} class="viewport" style="width: {width}; height: {height}">
     <div bind:this={contents} class="contents">
       <slot />

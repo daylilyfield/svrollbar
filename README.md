@@ -1,5 +1,10 @@
 # svrollbar
 
+[![npm](https://badge.fury.io/js/svrollbar.svg)](https://badge.fury.io/js/svrollbar)
+[![license](https://img.shields.io/badge/License-MIT-yellow.svg)](https://opensource.org/licenses/MIT)
+[![actions](https://github.com/daylilyfield/svrollbar/workflows/build%20%26%20test/badge.svg)](https://github.com/daylilyfield/svrollbar/actions)
+[![coverall](https://coveralls.io/repos/github/daylilyfield/svrollbar/badge.svg?branch=main)](https://coveralls.io/github/daylilyfield/svrollbar?branch=main)
+
 svrollbar is the custom scrollbar made by svelte.
 
 ## how to install
