@@ -4,7 +4,7 @@
 
 <p align="center">
   <img src="https://raw.githubusercontent.com/daylilyfield/svrollbar/main/docs/assets/svrollbar-default.gif" />
-  <img src="https://raw.githubusercontent.com/daylilyfield/svrollbar/main/docs/assets/svrollbar-gradation-truck.gif" />
+  <img src="https://raw.githubusercontent.com/daylilyfield/svrollbar/main/docs/assets/svrollbar-gradation-track.gif" />
   <img src="https://raw.githubusercontent.com/daylilyfield/svrollbar/main/docs/assets/svrollbar-crossfade.gif" />
   <img src="https://raw.githubusercontent.com/daylilyfield/svrollbar/main/docs/assets/svrollbar-fly.gif" />
 </p>
