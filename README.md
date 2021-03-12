@@ -2,6 +2,13 @@
   <img src="https://raw.githubusercontent.com/daylilyfield/svrollbar/main/docs/assets/svrollbar.png" />
 </p>
 
+<p align="center">
+  <img src="https://raw.githubusercontent.com/daylilyfield/svrollbar/main/docs/assets/svrollbar-default.png" />
+  <img src="https://raw.githubusercontent.com/daylilyfield/svrollbar/main/docs/assets/svrollbar-gradation-truck.png" />
+  <img src="https://raw.githubusercontent.com/daylilyfield/svrollbar/main/docs/assets/svrollbar-crossfade.png" />
+  <img src="https://raw.githubusercontent.com/daylilyfield/svrollbar/main/docs/assets/svrollbar-fly.png" />
+</p>
+
 # svrollbar
 
 [![npm](https://badge.fury.io/js/svrollbar.svg)](https://badge.fury.io/js/svrollbar)
