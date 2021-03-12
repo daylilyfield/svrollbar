@@ -1,5 +1,5 @@
 <p align="center">
-  <img src="https://raw.githubusercontent.com/daylilyfield/svrollbar/main/docs/svrollbar.png" />
+  <img src="https://raw.githubusercontent.com/daylilyfield/svrollbar/main/docs/assets/svrollbar.png" />
 </p>
 
 # svrollbar
