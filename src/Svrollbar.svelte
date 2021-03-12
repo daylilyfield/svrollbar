@@ -1,6 +1,6 @@
 <script>
   import { fade } from 'svelte/transition'
-  import { createEventDispatcher } from 'svelte'
+  import { createEventDispatcher, onDestroy } from 'svelte'
 
   /**
    * @type {HTMLElement}
@@ -144,7 +144,7 @@
   function onScroll() {
     clearTimer()
     setupTimer()
-
+    debugger
     visible = alwaysVisible || true
     scrollTop = viewport?.scrollTop ?? 0
 
@@ -195,6 +195,13 @@
     document.removeEventListener('mouseup', onThumbUp)
     document.removeEventListener('touchend', onThumbUp)
   }
+
+  onDestroy(() => {
+    teardownViewport?.()
+    teardownContents?.()
+    teardownTrack?.()
+    teardownThumb?.()
+  })
 </script>
 
 <style>
