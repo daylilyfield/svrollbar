@@ -24,7 +24,7 @@ describe('Svroller.svelte', () => {
     jest.useFakeTimers()
 
     const { container, unmount } = render(Svroller)
-    const viewport = container.querySelector('.viewport')
+    const viewport = container.querySelector('.svlr-viewport')
 
     await fireEvent.scroll(viewport)
 

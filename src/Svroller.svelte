@@ -35,11 +35,11 @@
 </script>
 
 <style>
-  .wrapper {
+  .svlr-wrapper {
     position: relative;
   }
 
-  .viewport {
+  .svlr-viewport {
     position: relative;
     overflow: scroll;
     box-sizing: border-box;
@@ -49,15 +49,15 @@
     scrollbar-width: none;
   }
 
-  .viewport::-webkit-scrollbar {
+  .svlr-viewport::-webkit-scrollbar {
     /* hide scrollbar */
     display: none;
   }
 </style>
 
-<div class="wrapper" style="width: {width}; height: {height}">
-  <div bind:this={viewport} class="viewport" style="width: {width}; height: {height}">
-    <div bind:this={contents} class="contents">
+<div class="svlr-wrapper" style="width: {width}; height: {height}">
+  <div bind:this={viewport} class="svlr-viewport" style="width: {width}; height: {height}">
+    <div bind:this={contents} class="svlr-contents">
       <slot />
     </div>
   </div>

@@ -1,3 +1,7 @@
+<p align="center">
+  <img src="https://raw.githubusercontent.com/daylilyfield/svrollbar/main/docs/svrollbar.png" />
+</p>
+
 # svrollbar
 
 [![npm](https://badge.fury.io/js/svrollbar.svg)](https://badge.fury.io/js/svrollbar)
