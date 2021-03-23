@@ -69,10 +69,6 @@
   $: thumbHeight = (trackHeight / wholeHeight) * trackHeight ?? 0
   $: thumbTop = (scrollTop / wholeHeight) * trackHeight ?? 0
 
-  $: console.log(
-    `wholeHeight: ${wholeHeight}, scrollTop: ${scrollTop}, trackHeight: ${trackHeight}, thumbHeight: ${thumbHeight}, thumbTop: ${thumbTop}`
-  )
-
   function setupViewport(viewport) {
     if (!viewport) return
 
@@ -230,8 +226,8 @@
   }
 
   onMount(() => {
-    viewport ??= document.scrollingElement
-    contents ??= document.body
+    viewport = viewport ?? document.scrollingElement
+    contents = contents ?? document.body
   })
 
   onDestroy(() => {

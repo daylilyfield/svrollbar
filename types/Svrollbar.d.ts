@@ -2,9 +2,9 @@
 import { SvelteComponentTyped } from "svelte";
 
 export interface SvrollbarProps {
-  viewport?: HTMLElement;
+  viewport?: undefined;
 
-  contents?: HTMLElement;
+  contents?: undefined;
 
   /**
    * @default 1000

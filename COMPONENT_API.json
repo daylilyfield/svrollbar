@@ -8,18 +8,16 @@
         {
           "name": "viewport",
           "kind": "let",
-          "type": "HTMLElement",
           "isFunction": false,
           "constant": false,
-          "reactive": false
+          "reactive": true
         },
         {
           "name": "contents",
           "kind": "let",
-          "type": "HTMLElement",
           "isFunction": false,
           "constant": false,
-          "reactive": false
+          "reactive": true
         },
         {
           "name": "hideAfter",

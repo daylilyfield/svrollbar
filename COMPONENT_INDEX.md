@@ -13,8 +13,8 @@
 
 | Prop name     | Kind             | Reactive | Type                                                                     | Default value                                        | Description |
 | :------------ | :--------------- | :------- | :----------------------------------------------------------------------- | ---------------------------------------------------- | ----------- |
-| viewport      | <code>let</code> | No       | <code>HTMLElement</code>                                                 | --                                                   | --          |
-| contents      | <code>let</code> | No       | <code>HTMLElement</code>                                                 | --                                                   | --          |
+| contents      | <code>let</code> | Yes      | --                                                                       | --                                                   | --          |
+| viewport      | <code>let</code> | Yes      | --                                                                       | --                                                   | --          |
 | hideAfter     | <code>let</code> | No       | <code>number</code>                                                      | <code>1000</code>                                    | --          |
 | alwaysVisible | <code>let</code> | No       | <code>boolean</code>                                                     | <code>false</code>                                   | --          |
 | vTrackIn      | <code>let</code> | No       | <code>(node: HTMLElement, params: any) => svelte.TransitionConfig</code> | <code>(node) => fade(node, { duration: 100 })</code> | --          |
