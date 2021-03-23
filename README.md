@@ -18,6 +18,17 @@
 
 svrollbar is the custom scrollbar made by svelte.
 
+- [how to install](#how-to-install)
+- [examples](#examples)
+- [how to use](#how-to-use)
+  - [replace window scrollbar](#replace-window-scrollbar)
+  - [make scrollble area](#make-scrollable-area)
+  - [replace overflow-based scrollbar](#replace-overflow-based-scrollbar)
+  - [integrate 3rd party libraries](#integrate-3rd-party-libraries)
+- [components spec](#components-spec)
+- [how to customize transition](#how-to-customize-transition)
+- [how to customize style](#how-to-customize-style)
+
 ## how to install
 
 ```bash
@@ -32,8 +43,35 @@ example svelte REPL is [here](https://svelte.dev/repl/d600db3bde4742ec8d9751e009
 
 ## how to use
 
-svrollbar has two components; `Svrollbar.svelte` and `Svroller.svelte`.  
-if you would like to make things simpler, you may prefer `Svroller.svelte`.
+svrollbar has two components; `Svrollbar.svelte` and `Svroller.svelte`.
+svrollbar is supposed to use with svelte,
+but if you want, you can use svrollbar without svelte.
+
+### replace window scrollbar
+
+if you would like to customize your window scrollbar,
+you simply write down `Svrollbar.svelte` with empty properties,
+
+```svelte
+<Svrollbar />
+```
+
+this is equivalent to:
+
+```svelte
+<Svrollbar viewport={document.scrollingElement} contents={document.body} />
+```
+
+yes, you can see the customized scrollbar on the right side of your browser window.
+please watch out [example website](https://daylilyfield.github.io/svrollbar/)
+to see the live example.
+
+### make scrollable area
+
+if you try to make scrollable area within a part of your web site,
+you may prefer to use `Svroller.svelte`.
+the below example shows you the list which has 50 rows
+in a 10rem x 10rem square scrollable area with the custom scrollbar.
 
 ```svelte
 <script lang="ts">
@@ -49,6 +87,8 @@ if you would like to make things simpler, you may prefer `Svroller.svelte`.
 </Svroller>
 ```
 
+### replace overflow-based scrollbar
+
 on the other hand, it is better to use `Svrollbar.svelte`
 if you already have a kind of scrollable viewport or contents.
 
@@ -58,8 +98,8 @@ if you already have a kind of scrollable viewport or contents.
 
   const items = Array.from({ length: 50 }).map((_, i) => `item ${i}`)
 
-  export let viewport: HTMLElement
-  export let contents: HTMLElement
+  export let viewport: Element
+  export let contents: Element
 </script>
 
 <style>
@@ -99,7 +139,11 @@ if you already have a kind of scrollable viewport or contents.
 </div>
 ```
 
-## integration
+notice, you do not need to specify fixed value to width or height of viewport.
+you can set min-\*, max-\*, and any dynamic and reactive value because
+svrollbar observes both viewport size and its content size by ResizeObserver.
+
+### integrate 3rd party libraries
 
 if you would like to integrate svrollbar into some kind of virtual list
 implemenation such as
@@ -116,8 +160,8 @@ you can do that in the following way.
 
   const items = Array.from({ length: 50 }).map((_, i) => `item ${i}`)
 
-  let viewport: HTMLElement
-  let contents: HTMLElement
+  let viewport: Element
+  let contents: Element
 
   onMount(() => {
     viewport = document.querySelector('.virtual-list-wrapper')
@@ -159,7 +203,7 @@ see [here](./COMPONENT_INDEX.md).
 
 ## how to customize transition
 
-since the simple fade animation is realy a bore,
+since the simple fade animation is really a bore,
 you can replace the default fade (show/hide) animation with your one.
 the transition function is compatible with the svelte transition.
 
@@ -242,3 +286,5 @@ you can customize svrollbar style with css variables.
 - [x] drop shadow support
 - [x] draggable thumb to scroll
 - [x] scrollbar show/hide animation
+- [x] dynamic resizing
+- [x] replace window scrollbar

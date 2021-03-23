@@ -1,14 +1,16 @@
 <script>
   import { fade } from 'svelte/transition'
-  import { createEventDispatcher, onDestroy } from 'svelte'
+  import { createEventDispatcher, onDestroy, onMount } from 'svelte'
 
   /**
-   * @type {HTMLElement}
+   * @type {Element}
+   * @default document.scrollingElement
    */
   export let viewport
 
   /**
-   * @type {HTMLElement}
+   * @type {Element}
+   * @default document.body
    */
   export let contents
 
@@ -54,6 +56,8 @@
   let timer = 0
   let visible = alwaysVisible
 
+  $: windowScrollEnabled = document.scrollingElement === viewport
+
   $: teardownViewport = setupViewport(viewport)
   $: teardownContents = setupContents(contents)
   $: teardownTrack = setupTrack(vTrack)
@@ -61,19 +65,48 @@
 
   $: wholeHeight = viewport?.scrollHeight ?? 0
   $: scrollTop = viewport?.scrollTop ?? 0
-  $: trackHeight = viewport?.offsetHeight ?? 0
+  $: trackHeight = viewport?.clientHeight ?? 0
   $: thumbHeight = (trackHeight / wholeHeight) * trackHeight ?? 0
   $: thumbTop = (scrollTop / wholeHeight) * trackHeight ?? 0
+
+  $: console.log(
+    `wholeHeight: ${wholeHeight}, scrollTop: ${scrollTop}, trackHeight: ${trackHeight}, thumbHeight: ${thumbHeight}, thumbTop: ${thumbTop}`
+  )
 
   function setupViewport(viewport) {
     if (!viewport) return
 
     teardownViewport?.()
 
+    // replace window scrollbar
+    if (windowScrollEnabled) {
+      // `document.scrolling` element has the addEventListener function but scroll event wont occur.
+      // so we should register the scroll listener to document.
+      document.addEventListener('scroll', onScroll, { passive: true })
+      return () => {
+        document.removeEventListener('scroll', onScroll)
+      }
+    }
+
+    if (typeof window.ResizeObserver === 'undefined') {
+      throw new Error('window.ResizeObserver is missing.')
+    }
+
     viewport.addEventListener('scroll', onScroll, { passive: true })
+
+    const observer = new ResizeObserver((entries) => {
+      for (const _entry of entries) {
+        wholeHeight = viewport?.scrollHeight ?? 0
+        trackHeight = viewport?.offsetHeight ?? 0
+      }
+    })
+
+    observer.observe(viewport)
 
     return () => {
       viewport.removeEventListener('scroll', onScroll)
+      observer.unobserve(contents)
+      observer.disconnect()
     }
   }
 
@@ -95,8 +128,8 @@
 
     teardownThumb?.()
 
-    vThumb.addEventListener('mousedown', onThumbDown)
-    vThumb.addEventListener('touchstart', onThumbDown)
+    vThumb.addEventListener('mousedown', onThumbDown, { passive: true })
+    vThumb.addEventListener('touchstart', onThumbDown, { passive: true })
 
     return () => {
       vThumb.removeEventListener('mousedown', onThumbDown)
@@ -196,6 +229,11 @@
     document.removeEventListener('touchend', onThumbUp)
   }
 
+  onMount(() => {
+    viewport ??= document.scrollingElement
+    contents ??= document.body
+  })
+
   onDestroy(() => {
     teardownViewport?.()
     teardownContents?.()
@@ -210,6 +248,10 @@
     top: 0;
     right: 0;
     width: var(--svrollbar-track-width, 10px);
+  }
+
+  .v-scrollbar.fixed {
+    position: fixed;
   }
 
   .v-track {
@@ -235,7 +277,7 @@
 </style>
 
 {#if visible}
-  <div class="v-scrollbar" style="height: {trackHeight}px">
+  <div class="v-scrollbar" class:fixed={windowScrollEnabled} style="height: {trackHeight}px">
     <div
       bind:this={vTrack}
       class="v-track"
