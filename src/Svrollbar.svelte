@@ -69,38 +69,34 @@
   $: thumbHeight = (trackHeight / wholeHeight) * trackHeight ?? 0
   $: thumbTop = (scrollTop / wholeHeight) * trackHeight ?? 0
 
+  $: console.log(wholeHeight, trackHeight, thumbHeight)
+
   function setupViewport(viewport) {
     if (!viewport) return
 
     teardownViewport?.()
 
-    // replace window scrollbar
-    if (windowScrollEnabled) {
-      // `document.scrolling` element has the addEventListener function but scroll event wont occur.
-      // so we should register the scroll listener to document.
-      document.addEventListener('scroll', onScroll, { passive: true })
-      return () => {
-        document.removeEventListener('scroll', onScroll)
-      }
-    }
-
     if (typeof window.ResizeObserver === 'undefined') {
       throw new Error('window.ResizeObserver is missing.')
     }
 
-    viewport.addEventListener('scroll', onScroll, { passive: true })
+    // `document.scrollingElement` has the addEventListener function but scroll events wont occur.
+    // so we should register the scroll listener to document.
+    const element = windowScrollEnabled ? document : viewport
+
+    element.addEventListener('scroll', onScroll, { passive: true })
 
     const observer = new ResizeObserver((entries) => {
       for (const _entry of entries) {
         wholeHeight = viewport?.scrollHeight ?? 0
-        trackHeight = viewport?.offsetHeight ?? 0
+        trackHeight = viewport?.clientHeight ?? 0
       }
     })
 
     observer.observe(viewport)
 
     return () => {
-      viewport.removeEventListener('scroll', onScroll)
+      element.removeEventListener('scroll', onScroll)
       observer.unobserve(contents)
       observer.disconnect()
     }
