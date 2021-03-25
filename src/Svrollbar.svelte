@@ -69,8 +69,6 @@
   $: thumbHeight = (trackHeight / wholeHeight) * trackHeight ?? 0
   $: thumbTop = (scrollTop / wholeHeight) * trackHeight ?? 0
 
-  $: console.log(wholeHeight, trackHeight, thumbHeight)
-
   function setupViewport(viewport) {
     if (!viewport) return
 
