@@ -4,13 +4,11 @@
 
   /**
    * @type {Element}
-   * @default document.scrollingElement
    */
   export let viewport
 
   /**
    * @type {Element}
-   * @default document.body
    */
   export let contents
 
@@ -232,6 +230,23 @@
   })
 </script>
 
+{#if visible}
+  <div class="v-scrollbar" class:fixed={windowScrollEnabled} style="height: {trackHeight}px">
+    <div
+      bind:this={vTrack}
+      class="v-track"
+      style="height: {trackHeight}px"
+      in:vTrackIn
+      out:vTrackOut />
+    <div
+      bind:this={vThumb}
+      class="v-thumb"
+      style="height: {thumbHeight}px; top: {thumbTop}px"
+      in:vThumbIn
+      out:vThumbOut />
+  </div>
+{/if}
+
 <style>
   .v-scrollbar {
     position: absolute;
@@ -265,20 +280,3 @@
     box-shadow: var(--svrollbar-thumb-shadow, initial);
   }
 </style>
-
-{#if visible}
-  <div class="v-scrollbar" class:fixed={windowScrollEnabled} style="height: {trackHeight}px">
-    <div
-      bind:this={vTrack}
-      class="v-track"
-      style="height: {trackHeight}px"
-      in:vTrackIn
-      out:vTrackOut />
-    <div
-      bind:this={vThumb}
-      class="v-thumb"
-      style="height: {thumbHeight}px; top: {thumbTop}px"
-      in:vThumbIn
-      out:vThumbOut />
-  </div>
-{/if}

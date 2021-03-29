@@ -8,6 +8,7 @@
         {
           "name": "viewport",
           "kind": "let",
+          "type": "Element",
           "isFunction": false,
           "constant": false,
           "reactive": true
@@ -15,6 +16,7 @@
         {
           "name": "contents",
           "kind": "let",
+          "type": "Element",
           "isFunction": false,
           "constant": false,
           "reactive": true

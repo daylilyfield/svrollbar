@@ -34,6 +34,25 @@
   let contents
 </script>
 
+<div class="svlr-wrapper" style="width: {width}; height: {height}">
+  <div bind:this={viewport} class="svlr-viewport" style="width: {width}; height: {height}">
+    <div bind:this={contents} class="svlr-contents">
+      <slot />
+    </div>
+  </div>
+  <Svrollbar
+    {viewport}
+    {contents}
+    {hideAfter}
+    {alwaysVisible}
+    {vTrackIn}
+    {vTrackOut}
+    {vThumbIn}
+    {vThumbOut}
+    on:show
+    on:hide />
+</div>
+
 <style>
   .svlr-wrapper {
     position: relative;
@@ -54,22 +73,3 @@
     display: none;
   }
 </style>
-
-<div class="svlr-wrapper" style="width: {width}; height: {height}">
-  <div bind:this={viewport} class="svlr-viewport" style="width: {width}; height: {height}">
-    <div bind:this={contents} class="svlr-contents">
-      <slot />
-    </div>
-  </div>
-  <Svrollbar
-    {viewport}
-    {contents}
-    {hideAfter}
-    {alwaysVisible}
-    {vTrackIn}
-    {vTrackOut}
-    {vThumbIn}
-    {vThumbOut}
-    on:show
-    on:hide />
-</div>

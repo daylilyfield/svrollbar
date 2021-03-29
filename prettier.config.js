@@ -1,5 +1,5 @@
 module.exports = {
-  svelteSortOrder: 'scripts-styles-options-markup',
+  svelteSortOrder: 'options-scripts-markup-styles',
   svelteBracketNewLine: false,
   printWidth: 100,
   trailingComma: 'es5',
