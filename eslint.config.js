@@ -2,7 +2,7 @@ module.exports = {
   root: true,
   extends: ['eslint:recommended', 'prettier'],
   parser: '@babel/eslint-parser',
-  plugins: ['svelte3', '@typescript-eslint'],
+  plugins: ['jest', 'svelte3'],
   overrides: [{ files: ['*.svelte'], processor: 'svelte3/svelte3' }],
   env: {
     browser: true,
