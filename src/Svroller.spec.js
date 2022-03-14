@@ -1,5 +1,6 @@
-import '@testing-library/jest-dom/extend-expect'
-import { fireEvent, render, waitFor } from '@testing-library/svelte'
+import '@testing-library/jest-dom'
+import { fireEvent, render, waitFor, waitForElementToBeRemoved } from '@testing-library/svelte'
+import { tick } from 'svelte'
 import Svroller from './Svroller.svelte'
 
 class ResizeObserverMock {
@@ -23,25 +24,16 @@ describe('Svroller.svelte', () => {
   it('should make scrollbar visible or invisible when scrolling', async () => {
     jest.useFakeTimers()
 
-    const { container, unmount } = render(Svroller)
+    const { container } = render(Svroller)
     const viewport = container.querySelector('.svlr-viewport')
 
     await fireEvent.scroll(viewport)
 
-    // because svrollbar add scroll event as **passive**,
-    // we need to wait until scrollbar appears
-    await waitFor(() => {
-      expect(container.querySelector('.v-scrollbar')).toBeInTheDocument()
-    })
+    expect(container.querySelector('.v-scrollbar')).toBeInTheDocument()
 
-    jest.runTimersToTime(1000)
-
-    await waitFor(() => {
-      expect(container.querySelector('.v-scrollbar')).not.toBeInTheDocument()
-    })
-
-    unmount()
-
+    jest.advanceTimersByTime(1000)
     jest.useRealTimers()
+
+    await waitForElementToBeRemoved(container.querySelector('.v-scrollbar'))
   })
 })

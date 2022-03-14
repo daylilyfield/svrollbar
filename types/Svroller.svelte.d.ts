@@ -25,22 +25,34 @@ export interface SvrollerProps {
   /**
    * @default (node) => fade(node, { duration: 100 })
    */
-  vTrackIn?: (node: HTMLElement, params: any) => svelte.TransitionConfig;
+  vTrackIn?: (
+    node: HTMLElement,
+    params: any
+  ) => import("svelte/transition").TransitionConfig;
 
   /**
    * @default (node) => fade(node, { duration: 300 })
    */
-  vTrackOut?: (node: HTMLElement, params: any) => svelte.TransitionConfig;
+  vTrackOut?: (
+    node: HTMLElement,
+    params: any
+  ) => import("svelte/transition").TransitionConfig;
 
   /**
    * @default (node) => fade(node, { duration: 100 })
    */
-  vThumbIn?: (node: HTMLElement, params: any) => svelte.TransitionConfig;
+  vThumbIn?: (
+    node: HTMLElement,
+    params: any
+  ) => import("svelte/transition").TransitionConfig;
 
   /**
    * @default (node) => fade(node, { duration: 300 })
    */
-  vThumbOut?: (node: HTMLElement, params: any) => svelte.TransitionConfig;
+  vThumbOut?: (
+    node: HTMLElement,
+    params: any
+  ) => import("svelte/transition").TransitionConfig;
 }
 
 export default class Svroller extends SvelteComponentTyped<

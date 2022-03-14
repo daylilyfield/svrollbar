@@ -13,20 +13,20 @@
   export let alwaysVisible = false
 
   /**
-   * @type {(node: HTMLElement, params: any) => svelte.TransitionConfig}
+   * @type {(node: HTMLElement, params: any) => import('svelte/transition').TransitionConfig}
    */
   export let vTrackIn = (node) => fade(node, { duration: 100 })
   /**
-   * @type {(node: HTMLElement, params: any) => svelte.TransitionConfig}
+   * @type {(node: HTMLElement, params: any) => import('svelte/transition').TransitionConfig}
    */
   export let vTrackOut = (node) => fade(node, { duration: 300 })
 
   /**
-   * @type {(node: HTMLElement, params: any) => svelte.TransitionConfig}
+   * @type {(node: HTMLElement, params: any) => import('svelte/transition').TransitionConfig}
    */
   export let vThumbIn = (node) => fade(node, { duration: 100 })
   /**
-   * @type {(node: HTMLElement, params: any) => svelte.TransitionConfig}
+   * @type {(node: HTMLElement, params: any) => import('svelte/transition').TransitionConfig}
    */
   export let vThumbOut = (node) => fade(node, { duration: 300 })
 

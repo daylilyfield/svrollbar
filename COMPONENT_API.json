@@ -10,6 +10,7 @@
           "kind": "let",
           "type": "Element",
           "isFunction": false,
+          "isFunctionDeclaration": false,
           "constant": false,
           "reactive": true
         },
@@ -18,6 +19,7 @@
           "kind": "let",
           "type": "Element",
           "isFunction": false,
+          "isFunctionDeclaration": false,
           "constant": false,
           "reactive": true
         },
@@ -27,6 +29,7 @@
           "type": "number",
           "value": "1000",
           "isFunction": false,
+          "isFunctionDeclaration": false,
           "constant": false,
           "reactive": false
         },
@@ -36,46 +39,52 @@
           "type": "boolean",
           "value": "false",
           "isFunction": false,
+          "isFunctionDeclaration": false,
           "constant": false,
           "reactive": false
         },
         {
           "name": "vTrackIn",
           "kind": "let",
-          "type": "(node: HTMLElement, params: any) => svelte.TransitionConfig",
+          "type": "(node: HTMLElement, params: any) => import('svelte/transition').TransitionConfig",
           "value": "(node) => fade(node, { duration: 100 })",
           "isFunction": true,
+          "isFunctionDeclaration": false,
           "constant": false,
           "reactive": false
         },
         {
           "name": "vTrackOut",
           "kind": "let",
-          "type": "(node: HTMLElement, params: any) => svelte.TransitionConfig",
+          "type": "(node: HTMLElement, params: any) => import('svelte/transition').TransitionConfig",
           "value": "(node) => fade(node, { duration: 300 })",
           "isFunction": true,
+          "isFunctionDeclaration": false,
           "constant": false,
           "reactive": false
         },
         {
           "name": "vThumbIn",
           "kind": "let",
-          "type": "(node: HTMLElement, params: any) => svelte.TransitionConfig",
+          "type": "(node: HTMLElement, params: any) => import('svelte/transition').TransitionConfig",
           "value": "(node) => fade(node, { duration: 100 })",
           "isFunction": true,
+          "isFunctionDeclaration": false,
           "constant": false,
           "reactive": false
         },
         {
           "name": "vThumbOut",
           "kind": "let",
-          "type": "(node: HTMLElement, params: any) => svelte.TransitionConfig",
+          "type": "(node: HTMLElement, params: any) => import('svelte/transition').TransitionConfig",
           "value": "(node) => fade(node, { duration: 300 })",
           "isFunction": true,
+          "isFunctionDeclaration": false,
           "constant": false,
           "reactive": false
         }
       ],
+      "moduleExports": [],
       "slots": [],
       "events": [
         { "type": "dispatched", "name": "show" },
@@ -93,6 +102,7 @@
           "type": "string",
           "value": "'10rem'",
           "isFunction": false,
+          "isFunctionDeclaration": false,
           "constant": false,
           "reactive": false
         },
@@ -102,6 +112,7 @@
           "type": "string",
           "value": "'10rem'",
           "isFunction": false,
+          "isFunctionDeclaration": false,
           "constant": false,
           "reactive": false
         },
@@ -111,6 +122,7 @@
           "type": "number",
           "value": "1000",
           "isFunction": false,
+          "isFunctionDeclaration": false,
           "constant": false,
           "reactive": false
         },
@@ -120,46 +132,52 @@
           "type": "boolean",
           "value": "false",
           "isFunction": false,
+          "isFunctionDeclaration": false,
           "constant": false,
           "reactive": false
         },
         {
           "name": "vTrackIn",
           "kind": "let",
-          "type": "(node: HTMLElement, params: any) => svelte.TransitionConfig",
+          "type": "(node: HTMLElement, params: any) => import('svelte/transition').TransitionConfig",
           "value": "(node) => fade(node, { duration: 100 })",
           "isFunction": true,
+          "isFunctionDeclaration": false,
           "constant": false,
           "reactive": false
         },
         {
           "name": "vTrackOut",
           "kind": "let",
-          "type": "(node: HTMLElement, params: any) => svelte.TransitionConfig",
+          "type": "(node: HTMLElement, params: any) => import('svelte/transition').TransitionConfig",
           "value": "(node) => fade(node, { duration: 300 })",
           "isFunction": true,
+          "isFunctionDeclaration": false,
           "constant": false,
           "reactive": false
         },
         {
           "name": "vThumbIn",
           "kind": "let",
-          "type": "(node: HTMLElement, params: any) => svelte.TransitionConfig",
+          "type": "(node: HTMLElement, params: any) => import('svelte/transition').TransitionConfig",
           "value": "(node) => fade(node, { duration: 100 })",
           "isFunction": true,
+          "isFunctionDeclaration": false,
           "constant": false,
           "reactive": false
         },
         {
           "name": "vThumbOut",
           "kind": "let",
-          "type": "(node: HTMLElement, params: any) => svelte.TransitionConfig",
+          "type": "(node: HTMLElement, params: any) => import('svelte/transition').TransitionConfig",
           "value": "(node) => fade(node, { duration: 300 })",
           "isFunction": true,
+          "isFunctionDeclaration": false,
           "constant": false,
           "reactive": false
         }
       ],
+      "moduleExports": [],
       "slots": [{ "name": "__default__", "default": true, "slot_props": "{}" }],
       "events": [
         { "type": "forwarded", "name": "show", "element": "Svrollbar" },

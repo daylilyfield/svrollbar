@@ -2,10 +2,17 @@ module.exports = {
   verbose: true,
   transform: {
     '^.+\\.js$': 'babel-jest',
-    '^.+\\.svelte$': 'jest-transform-svelte',
+    '^.+\\.svelte$': [
+      'svelte-jester',
+      {
+        compilerOptions: {
+          immutable: true,
+        },
+      },
+    ],
   },
+  testEnvironment: 'jsdom',
   moduleFileExtensions: ['js', 'svelte'],
-  setupFilesAfterEnv: ['@testing-library/jest-dom/extend-expect'],
   testPathIgnorePatterns: [
     '/node_modules/',
     '/web_modules/',
@@ -14,6 +21,8 @@ module.exports = {
     '/lib/',
     '/types/',
   ],
+
+  coverageProvider: 'v8',
   coverageThreshold: {
     global: { branches: 70 },
   },

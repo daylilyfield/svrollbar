@@ -1,5 +1,5 @@
-import '@testing-library/jest-dom/extend-expect'
-import { fireEvent, render, waitFor } from '@testing-library/svelte'
+import '@testing-library/jest-dom'
+import { fireEvent, render, waitFor, waitForElementToBeRemoved } from '@testing-library/svelte'
 import Svrollbar from './Svrollbar.svelte'
 
 class ResizeObserverMock {
@@ -27,28 +27,19 @@ describe('Svrollbar.svelte', () => {
     const viewport = document.createElement('div')
     const contents = document.createElement('div')
 
-    const { container, unmount } = render(Svrollbar, {
+    const { container } = render(Svrollbar, {
       viewport,
       contents,
     })
 
     await fireEvent.scroll(viewport)
 
-    // because svrollbar add scroll event as **passive**,
-    // we need to wait until scrollbar appears
-    await waitFor(() => {
-      expect(container.querySelector('.v-scrollbar')).toBeInTheDocument()
-    })
+    expect(container.querySelector('.v-scrollbar')).toBeInTheDocument()
 
-    jest.runTimersToTime(1000)
-
-    await waitFor(() => {
-      expect(container.querySelector('.v-scrollbar')).not.toBeInTheDocument()
-    })
-
-    unmount()
-
+    jest.advanceTimersByTime(1000)
     jest.useRealTimers()
+
+    waitForElementToBeRemoved(container.querySelector('.v-scrollbar'))
   })
 
   it('should hide scrollbar after specified milliseconds', async () => {
@@ -57,30 +48,22 @@ describe('Svrollbar.svelte', () => {
     const viewport = document.createElement('div')
     const contents = document.createElement('div')
 
-    const { container, unmount } = render(Svrollbar, {
+    const { container } = render(Svrollbar, {
       viewport,
       contents,
     })
 
     await fireEvent.scroll(viewport)
 
-    await waitFor(() => {
-      expect(container.querySelector('.v-scrollbar')).toBeInTheDocument()
-    })
+    expect(container.querySelector('.v-scrollbar')).toBeInTheDocument()
 
-    jest.runTimersToTime(1000)
+    jest.advanceTimersByTime(1000)
 
-    await waitFor(() => {
-      expect(container.querySelector('.v-scrollbar')).toBeInTheDocument()
-    })
+    expect(container.querySelector('.v-scrollbar')).toBeInTheDocument()
 
-    jest.runTimersToTime(2000)
+    jest.advanceTimersByTime(2000)
 
-    await waitFor(() => {
-      expect(container.querySelector('.v-scrollbar')).not.toBeInTheDocument()
-    })
-
-    unmount()
+    waitForElementToBeRemoved(container.querySelector('.v-scrollbar'))
 
     jest.useRealTimers()
   })
@@ -99,21 +82,15 @@ describe('Svrollbar.svelte', () => {
     await fireEvent.scroll(viewport)
     await fireEvent.mouseEnter(container.querySelector('.v-track'))
 
-    jest.runTimersToTime(1000)
+    jest.advanceTimersByTime(1000)
 
-    await waitFor(() => {
-      expect(container.querySelector('.v-scrollbar')).toBeInTheDocument()
-    })
+    expect(container.querySelector('.v-scrollbar')).toBeInTheDocument()
 
     await fireEvent.mouseLeave(container.querySelector('.v-track'))
 
-    jest.runTimersToTime(2000)
+    jest.advanceTimersByTime(2000)
 
-    await waitFor(() => {
-      expect(container.querySelector('.v-scrollbar')).not.toBeInTheDocument()
-    })
-
-    unmount()
+    waitForElementToBeRemoved(container.querySelector('.v-scrollbar'))
 
     jest.useRealTimers()
   })
@@ -122,16 +99,14 @@ describe('Svrollbar.svelte', () => {
     const viewport = document.createElement('div')
     const contents = document.createElement('div')
 
-    const { container, unmount } = render(Svrollbar, {
+    const { container } = render(Svrollbar, {
       viewport,
       contents,
     })
 
     await fireEvent.scroll(viewport)
 
-    await waitFor(() => {
-      expect(container.querySelector('.v-scrollbar')).toBeInTheDocument()
-    })
+    expect(container.querySelector('.v-scrollbar')).toBeInTheDocument()
 
     const thumb = container.querySelector('.v-thumb')
 
@@ -157,8 +132,6 @@ describe('Svrollbar.svelte', () => {
     expect(removedEvents).toContain('touchmove')
     expect(removedEvents).toContain('mouseup')
     expect(removedEvents).toContain('touchend')
-
-    unmount()
   })
 
   it('should error when ResizeObserver is missing', () => {

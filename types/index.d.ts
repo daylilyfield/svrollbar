@@ -1,2 +1,2 @@
-export { default as Svrollbar } from "./Svrollbar";
-export { default as Svroller } from "./Svroller";
+export { default as Svrollbar } from "./Svrollbar.svelte";
+export { default as Svroller } from "./Svroller.svelte";

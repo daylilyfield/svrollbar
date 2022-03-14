@@ -23,20 +23,20 @@
   export let alwaysVisible = false
 
   /**
-   * @type {(node: HTMLElement, params: any) => svelte.TransitionConfig}
+   * @type {(node: HTMLElement, params: any) => import('svelte/transition').TransitionConfig}
    */
   export let vTrackIn = (node) => fade(node, { duration: 100 })
   /**
-   * @type {(node: HTMLElement, params: any) => svelte.TransitionConfig}
+   * @type {(node: HTMLElement, params: any) => import('svelte/transition').TransitionConfig}
    */
   export let vTrackOut = (node) => fade(node, { duration: 300 })
 
   /**
-   * @type {(node: HTMLElement, params: any) => svelte.TransitionConfig}
+   * @type {(node: HTMLElement, params: any) => import('svelte/transition').TransitionConfig}
    */
   export let vThumbIn = (node) => fade(node, { duration: 100 })
   /**
-   * @type {(node: HTMLElement, params: any) => svelte.TransitionConfig}
+   * @type {(node: HTMLElement, params: any) => import('svelte/transition').TransitionConfig}
    */
   export let vThumbOut = (node) => fade(node, { duration: 300 })
 
@@ -53,8 +53,7 @@
   let startY = 0
   let timer = 0
   let visible = alwaysVisible
-
-  $: windowScrollEnabled = document.scrollingElement === viewport
+  let windowScrollEnabled = false
 
   $: teardownViewport = setupViewport(viewport)
   $: teardownContents = setupContents(contents)
@@ -75,6 +74,8 @@
     if (typeof window.ResizeObserver === 'undefined') {
       throw new Error('window.ResizeObserver is missing.')
     }
+
+    windowScrollEnabled = document.scrollingElement === viewport
 
     // `document.scrollingElement` has the addEventListener function but scroll events wont occur.
     // so we should register the scroll listener to document.
