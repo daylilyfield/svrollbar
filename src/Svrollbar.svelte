@@ -23,6 +23,11 @@
   export let alwaysVisible = false
 
   /**
+   * @type {boolean}
+   */
+  export let initiallyVisible = false
+
+  /**
    * @type {(node: HTMLElement, params: any) => import('svelte/transition').TransitionConfig}
    */
   export let vTrackIn = (node) => fade(node, { duration: 100 })
@@ -52,8 +57,8 @@
   let startTop = 0
   let startY = 0
   let timer = 0
-  let visible = alwaysVisible
   let windowScrollEnabled = false
+  let interacted = false
 
   $: teardownViewport = setupViewport(viewport)
   $: teardownContents = setupContents(contents)
@@ -65,6 +70,9 @@
   $: trackHeight = viewport?.clientHeight ?? 0
   $: thumbHeight = (trackHeight / wholeHeight) * trackHeight ?? 0
   $: thumbTop = (scrollTop / wholeHeight) * trackHeight ?? 0
+
+  $: scrollable = wholeHeight > trackHeight
+  $: visible = alwaysVisible || (initiallyVisible && scrollable)
 
   function setupViewport(viewport) {
     if (!viewport) return
@@ -151,7 +159,7 @@
 
   function setupTimer() {
     timer = window.setTimeout(() => {
-      visible = alwaysVisible || false
+      visible = alwaysVisible || (initiallyVisible && !interacted && scrollable) || false
       dispatch('hide')
     }, hideAfter)
   }
@@ -167,8 +175,10 @@
     clearTimer()
     setupTimer()
 
-    visible = alwaysVisible || true
+    visible = alwaysVisible || (initiallyVisible && !interacted && scrollable) || true
     scrollTop = viewport?.scrollTop ?? 0
+
+    interacted = true
 
     dispatch('show')
   }

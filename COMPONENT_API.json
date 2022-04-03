@@ -44,6 +44,16 @@
           "reactive": false
         },
         {
+          "name": "initiallyVisible",
+          "kind": "let",
+          "type": "boolean",
+          "value": "false",
+          "isFunction": false,
+          "isFunctionDeclaration": false,
+          "constant": false,
+          "reactive": false
+        },
+        {
           "name": "vTrackIn",
           "kind": "let",
           "type": "(node: HTMLElement, params: any) => import('svelte/transition').TransitionConfig",
@@ -128,6 +138,16 @@
         },
         {
           "name": "alwaysVisible",
+          "kind": "let",
+          "type": "boolean",
+          "value": "false",
+          "isFunction": false,
+          "isFunctionDeclaration": false,
+          "constant": false,
+          "reactive": false
+        },
+        {
+          "name": "initiallyVisible",
           "kind": "let",
           "type": "boolean",
           "value": "false",

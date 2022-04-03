@@ -13,6 +13,11 @@
   export let alwaysVisible = false
 
   /**
+   * @type {boolean}
+   */
+  export let initiallyVisible = false
+
+  /**
    * @type {(node: HTMLElement, params: any) => import('svelte/transition').TransitionConfig}
    */
   export let vTrackIn = (node) => fade(node, { duration: 100 })
@@ -45,6 +50,7 @@
     {contents}
     {hideAfter}
     {alwaysVisible}
+    {initiallyVisible}
     {vTrackIn}
     {vTrackOut}
     {vThumbIn}

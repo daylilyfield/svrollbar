@@ -23,6 +23,11 @@ export interface SvrollbarProps {
   alwaysVisible?: boolean;
 
   /**
+   * @default false
+   */
+  initiallyVisible?: boolean;
+
+  /**
    * @default (node) => fade(node, { duration: 100 })
    */
   vTrackIn?: (

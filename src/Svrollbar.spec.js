@@ -1,5 +1,5 @@
 import '@testing-library/jest-dom'
-import { fireEvent, render, waitForElementToBeRemoved } from '@testing-library/svelte'
+import { waitFor, fireEvent, render, waitForElementToBeRemoved } from '@testing-library/svelte'
 import Svrollbar from './Svrollbar.svelte'
 
 class ResizeObserverMock {
@@ -132,6 +132,55 @@ describe('Svrollbar.svelte', () => {
     expect(removedEvents).toContain('touchmove')
     expect(removedEvents).toContain('mouseup')
     expect(removedEvents).toContain('touchend')
+  })
+
+  it('should make scrollbar visible with alwaysVisible', async () => {
+    jest.useFakeTimers()
+
+    const viewport = document.createElement('div')
+    const contents = document.createElement('div')
+
+    const { container } = render(Svrollbar, {
+      viewport,
+      contents,
+      alwaysVisible: true,
+    })
+
+    await fireEvent.scroll(viewport)
+
+    expect(container.querySelector('.v-scrollbar')).toBeInTheDocument()
+
+    jest.advanceTimersByTime(1000)
+    jest.useRealTimers()
+
+    expect(container.querySelector('.v-scrollbar')).toBeInTheDocument()
+  })
+
+  it('should make scrollbar initialy visible with initialyVisible', async () => {
+    jest.useFakeTimers()
+
+    const viewport = document.createElement('div')
+    const contents = document.createElement('div')
+
+    jest.spyOn(viewport, 'scrollHeight', 'get').mockImplementation(() => 200)
+    jest.spyOn(viewport, 'clientHeight', 'get').mockImplementation(() => 100)
+
+    const { container } = render(Svrollbar, {
+      viewport,
+      contents,
+      initiallyVisible: true,
+    })
+
+    expect(container.querySelector('.v-scrollbar')).toBeInTheDocument()
+
+    await fireEvent.scroll(viewport)
+
+    expect(container.querySelector('.v-scrollbar')).toBeInTheDocument()
+
+    jest.advanceTimersByTime(1000)
+    jest.useRealTimers()
+
+    waitForElementToBeRemoved(container.querySelector('.v-scrollbar'))
   })
 
   it('should error when ResizeObserver is missing', () => {
