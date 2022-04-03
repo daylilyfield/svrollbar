@@ -1,18 +1,24 @@
-import adapter from '@sveltejs/adapter-static';
-import preprocess from 'svelte-preprocess';
+import adapter from '@sveltejs/adapter-static'
+import preprocess from 'svelte-preprocess'
 
 /** @type {import('@sveltejs/kit').Config} */
 const config = {
-	// Consult https://github.com/sveltejs/svelte-preprocess
-	// for more information about preprocessors
-	preprocess: preprocess(),
+  // Consult https://github.com/sveltejs/svelte-preprocess
+  // for more information about preprocessors
+  preprocess: preprocess(),
 
-	kit: {
-		paths: {
-			base: process.env.NODE_ENV === 'development' ? '' : '/svrollbar'
-		},
-		adapter: adapter()
-	}
-};
+  kit: {
+    paths: {
+      base: '/svrollbar',
+    },
+    prerender: {
+      default: true,
+    },
+    adapter: adapter({
+      pages: '../docs',
+    }),
+    appDir: 'internal',
+  },
+}
 
-export default config;
+export default config
