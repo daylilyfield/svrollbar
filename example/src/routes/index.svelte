@@ -80,7 +80,7 @@
       in:receive={opt}
       out:send={opt}>
       <span in:fade={{ delay: 190, duration: 10 }} out:fade={{ duration: 10 }}>
-        <img src="./svrollbar/GitHub-Mark-Light-120px-plus.png" alt="github logo" />
+        <img src="/svrollbar/GitHub-Mark-Light-120px-plus.png" alt="github logo" />
         View on GitHub
       </span>
     </a>
