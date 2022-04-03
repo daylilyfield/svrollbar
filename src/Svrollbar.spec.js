@@ -1,5 +1,5 @@
 import '@testing-library/jest-dom'
-import { waitFor, fireEvent, render, waitForElementToBeRemoved } from '@testing-library/svelte'
+import { fireEvent, render, waitForElementToBeRemoved } from '@testing-library/svelte'
 import Svrollbar from './Svrollbar.svelte'
 
 class ResizeObserverMock {
