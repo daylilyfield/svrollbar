@@ -1,12 +1,12 @@
 <p align="center">
-  <img src="https://raw.githubusercontent.com/daylilyfield/svrollbar/main/docs/assets/svrollbar.png" />
+  <img src="https://raw.githubusercontent.com/daylilyfield/svrollbar/main/docs/svrollbar.png" />
 </p>
 
 <p align="center">
-  <img src="https://raw.githubusercontent.com/daylilyfield/svrollbar/main/docs/assets/svrollbar-default.gif" />
-  <img src="https://raw.githubusercontent.com/daylilyfield/svrollbar/main/docs/assets/svrollbar-gradation-track.gif" />
-  <img src="https://raw.githubusercontent.com/daylilyfield/svrollbar/main/docs/assets/svrollbar-crossfade.gif" />
-  <img src="https://raw.githubusercontent.com/daylilyfield/svrollbar/main/docs/assets/svrollbar-fly.gif" />
+  <img src="https://raw.githubusercontent.com/daylilyfield/svrollbar/main/docs/svrollbar-default.gif" />
+  <img src="https://raw.githubusercontent.com/daylilyfield/svrollbar/main/docs/svrollbar-gradation-track.gif" />
+  <img src="https://raw.githubusercontent.com/daylilyfield/svrollbar/main/docs/svrollbar-crossfade.gif" />
+  <img src="https://raw.githubusercontent.com/daylilyfield/svrollbar/main/docs/svrollbar-fly.gif" />
 </p>
 
 # svrollbar
