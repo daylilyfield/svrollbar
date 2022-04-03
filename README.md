@@ -28,6 +28,7 @@ svrollbar is the custom scrollbar made by svelte.
 - [components spec](#components-spec)
 - [how to customize transition](#how-to-customize-transition)
 - [how to customize style](#how-to-customize-style)
+- [how to customize scrollbar visibility](#how-to-customize-scrollbar-visibility)
 
 ## how to install
 
@@ -102,6 +103,17 @@ if you already have a kind of scrollable viewport or contents.
   export let contents: Element
 </script>
 
+<div class="wrapper">
+  <div bind:this={viewport} class="viewport">
+    <div bind:this={contents} class="contents">
+      {#each items as item (item)}
+        <div>{item}</div>
+      {/each}
+    </div>
+  </div>
+  <Svrollbar {viewport} {contents} />
+</div>
+
 <style>
   .wrapper {
     position: relative;
@@ -126,17 +138,6 @@ if you already have a kind of scrollable viewport or contents.
     display: none;
   }
 </style>
-
-<div class="wrapper">
-  <div bind:this={viewport} class="viewport">
-    <div bind:this={contents} class="contents">
-      {#each items as item (item)}
-        <div>{item}</div>
-      {/each}
-    </div>
-  </div>
-  <Svrollbar {viewport} {contents} />
-</div>
 ```
 
 notice, you do not need to specify fixed value to width or height of viewport.
@@ -169,6 +170,15 @@ you can do that in the following way.
   })
 </script>
 
+<div class="wrapper">
+  <Svrollbar {viewport} {contents} />
+  <VirtualList width="10rem" height={160} itemCount={items.length} itemSize={16}>
+    <div slot="item" let:index let:style {style}>
+      {items[index]}
+    </div>
+  </VirtualList>
+</div>
+
 <style>
   :global(.virtual-list-wrapper) {
     /* hide scrollbar */
@@ -186,15 +196,6 @@ you can do that in the following way.
     width: 10rem;
   }
 </style>
-
-<div class="wrapper">
-  <Svrollbar {viewport} {contents} />
-  <VirtualList width="10rem" height={160} itemCount={items.length} itemSize={16}>
-    <div slot="item" let:index let:style {style}>
-      {items[index]}
-    </div>
-  </VirtualList>
-</div>
 ```
 
 ## components spec
@@ -254,6 +255,14 @@ you can customize svrollbar style with css variables.
   const items = Array.from({ length: 50 }).map((_, i) => `item ${i}`)
 </script>
 
+<div class="container">
+  <Svroller width="10rem" height="10rem">
+    {#each items as item (item)}
+      <div>{item}</div>
+    {/each}
+  </Svroller>
+</div>
+
 <style>
   .container {
     border: 3px solid #5d7150;
@@ -268,23 +277,13 @@ you can customize svrollbar style with css variables.
     --svrollbar-thumb-opacity: 1;
   }
 </style>
-
-<div class="container">
-  <Svroller width="10rem" height="10rem">
-    {#each items as item (item)}
-      <div>{item}</div>
-    {/each}
-  </Svroller>
-</div>
 ```
 
-## todos
+## how to customize scrollbar visibility
 
-- [x] always visible scrollbar
-- [x] scrollbar fade timeout
-- [ ] horizontal scroll support
-- [x] drop shadow support
-- [x] draggable thumb to scroll
-- [x] scrollbar show/hide animation
-- [x] dynamic resizing
-- [x] replace window scrollbar
+you can customize scrollbar visibility with `alwaysVisible` and `initiallyVisible` properties.
+
+| property         | default | description                          |
+| ---------------- | ------- | ------------------------------------ |
+| alwaysVisible    | false   | scrollbar is always visible          |
+| initiallyVisible | false   | scrollbar is visible until scrolling |
