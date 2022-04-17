@@ -67,6 +67,7 @@
     <Svrollbar
       on:show={() => (visible = false)}
       on:hide={() => (visible = true)}
+      margin={{ top: 8, bottom: 8, right: 8 }}
       hideAfter={1000}
       {vThumbIn}
       {vThumbOut} />

@@ -3,33 +3,45 @@ import { SvelteComponentTyped } from "svelte";
 
 export interface SvrollbarProps {
   /**
-   * the 1viewport` is a scrolling host element.
+   * the scrolling host element.
    * @default undefined
    */
   viewport?: Element;
 
   /**
-   * the `contents` is an area scrolled by host element.
+   * the area scrolled by host element.
    * @default undefined
    */
   contents?: Element;
 
   /**
+   * milliseconds to keep scrollbar visible.
    * @default 1000
    */
   hideAfter?: number;
 
   /**
+   * make scrollbar always visible if the content is scrollable.
    * @default false
    */
   alwaysVisible?: boolean;
 
   /**
+   * make scrollbar initially visible if the content is scrollable.
+   *
+   * after you interact with your scrollable contents, scrollbar fallback to the default visibility behavior.
    * @default false
    */
   initiallyVisible?: boolean;
 
   /**
+   * margin (px) from viewport top, right, bottom and left.
+   * @default {}
+   */
+  margin?: { top?: number; right?: number; buttom?: number; left?: number };
+
+  /**
+   * svelte transition to show track in.
    * @default (node) => fade(node, { duration: 100 })
    */
   vTrackIn?: (
@@ -38,6 +50,7 @@ export interface SvrollbarProps {
   ) => import("svelte/transition").TransitionConfig;
 
   /**
+   * svelte transition to hide track out.
    * @default (node) => fade(node, { duration: 300 })
    */
   vTrackOut?: (
@@ -46,6 +59,7 @@ export interface SvrollbarProps {
   ) => import("svelte/transition").TransitionConfig;
 
   /**
+   * svelte transition to show thumb in.
    * @default (node) => fade(node, { duration: 100 })
    */
   vThumbIn?: (
@@ -54,6 +68,7 @@ export interface SvrollbarProps {
   ) => import("svelte/transition").TransitionConfig;
 
   /**
+   * svelte transition to hide thumb out.
    * @default (node) => fade(node, { duration: 300 })
    */
   vThumbOut?: (

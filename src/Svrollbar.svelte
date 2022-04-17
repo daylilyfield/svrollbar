@@ -40,6 +40,13 @@
   export let initiallyVisible = false
 
   /**
+   * margin (px) from viewport top, right, bottom and left.
+   *
+   * @type {{ top?: number, right?: number, buttom?: number, left?: number }}
+   */
+  export let margin = {}
+
+  /**
    * svelte transition to show track in.
    *
    * @type {(node: HTMLElement, params: any) => import('svelte/transition').TransitionConfig}
@@ -86,11 +93,16 @@
   $: teardownTrack = setupTrack(vTrack)
   $: teardownThumb = setupThumb(vThumb)
 
+  $: marginTop = margin.top ?? 0
+  $: marginBottom = margin.bottom ?? 0
+  $: marginRight = margin.right ?? 0
+  $: marginLeft = margin.left ?? 0
+
   $: wholeHeight = viewport?.scrollHeight ?? 0
   $: scrollTop = viewport?.scrollTop ?? 0
-  $: trackHeight = viewport?.clientHeight ?? 0
-  $: thumbHeight = (trackHeight / wholeHeight) * trackHeight ?? 0
-  $: thumbTop = (scrollTop / wholeHeight) * trackHeight ?? 0
+  $: trackHeight = viewport?.clientHeight ?? 0 - (marginTop + marginBottom)
+  $: thumbHeight = wholeHeight > 0 ? (trackHeight / wholeHeight) * trackHeight : 0
+  $: thumbTop = wholeHeight > 0 ? (scrollTop / wholeHeight) * trackHeight : 0
 
   $: scrollable = wholeHeight > trackHeight
   $: visible = scrollable && (alwaysVisible || initiallyVisible)
@@ -115,7 +127,7 @@
     const observer = new ResizeObserver((entries) => {
       for (const _entry of entries) {
         wholeHeight = viewport?.scrollHeight ?? 0
-        trackHeight = viewport?.clientHeight ?? 0
+        trackHeight = viewport?.clientHeight - (marginTop + marginBottom) ?? 0
       }
     })
 
@@ -265,7 +277,10 @@
 </script>
 
 {#if visible}
-  <div class="v-scrollbar" class:fixed={windowScrollEnabled} style="height: {trackHeight}px">
+  <div
+    class="v-scrollbar"
+    class:fixed={windowScrollEnabled}
+    style="height: {trackHeight}px; margin: {marginTop}px {marginRight}px {marginBottom}px {marginLeft}px">
     <div
       bind:this={vTrack}
       class="v-track"

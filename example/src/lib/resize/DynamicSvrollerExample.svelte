@@ -3,7 +3,7 @@
 
   export let data: string[]
 
-  let height = 10
+  let height = 20
 </script>
 
 <div class="buttons">

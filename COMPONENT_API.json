@@ -8,7 +8,7 @@
         {
           "name": "viewport",
           "kind": "let",
-          "description": "the 1viewport` is a scrolling host element.",
+          "description": "the scrolling host element.",
           "type": "Element",
           "isFunction": false,
           "isFunctionDeclaration": false,
@@ -18,7 +18,7 @@
         {
           "name": "contents",
           "kind": "let",
-          "description": "the `contents` is an area scrolled by host element.",
+          "description": "the area scrolled by host element.",
           "type": "Element",
           "isFunction": false,
           "isFunctionDeclaration": false,
@@ -28,6 +28,7 @@
         {
           "name": "hideAfter",
           "kind": "let",
+          "description": "milliseconds to keep scrollbar visible.",
           "type": "number",
           "value": "1000",
           "isFunction": false,
@@ -38,6 +39,7 @@
         {
           "name": "alwaysVisible",
           "kind": "let",
+          "description": "make scrollbar always visible if the content is scrollable.",
           "type": "boolean",
           "value": "false",
           "isFunction": false,
@@ -48,6 +50,7 @@
         {
           "name": "initiallyVisible",
           "kind": "let",
+          "description": "make scrollbar initially visible if the content is scrollable.\n\nafter you interact with your scrollable contents, scrollbar fallback to the default visibility behavior.",
           "type": "boolean",
           "value": "false",
           "isFunction": false,
@@ -56,8 +59,20 @@
           "reactive": false
         },
         {
+          "name": "margin",
+          "kind": "let",
+          "description": "margin (px) from viewport top, right, bottom and left.",
+          "type": "{ top?: number, right?: number, buttom?: number, left?: number }",
+          "value": "{}",
+          "isFunction": false,
+          "isFunctionDeclaration": false,
+          "constant": false,
+          "reactive": false
+        },
+        {
           "name": "vTrackIn",
           "kind": "let",
+          "description": "svelte transition to show track in.",
           "type": "(node: HTMLElement, params: any) => import('svelte/transition').TransitionConfig",
           "value": "(node) => fade(node, { duration: 100 })",
           "isFunction": true,
@@ -68,6 +83,7 @@
         {
           "name": "vTrackOut",
           "kind": "let",
+          "description": "svelte transition to hide track out.",
           "type": "(node: HTMLElement, params: any) => import('svelte/transition').TransitionConfig",
           "value": "(node) => fade(node, { duration: 300 })",
           "isFunction": true,
@@ -78,6 +94,7 @@
         {
           "name": "vThumbIn",
           "kind": "let",
+          "description": "svelte transition to show thumb in.",
           "type": "(node: HTMLElement, params: any) => import('svelte/transition').TransitionConfig",
           "value": "(node) => fade(node, { duration: 100 })",
           "isFunction": true,
@@ -88,6 +105,7 @@
         {
           "name": "vThumbOut",
           "kind": "let",
+          "description": "svelte transition to hide thumb out.",
           "type": "(node: HTMLElement, params: any) => import('svelte/transition').TransitionConfig",
           "value": "(node) => fade(node, { duration: 300 })",
           "isFunction": true,
@@ -153,6 +171,17 @@
           "kind": "let",
           "type": "boolean",
           "value": "false",
+          "isFunction": false,
+          "isFunctionDeclaration": false,
+          "constant": false,
+          "reactive": false
+        },
+        {
+          "name": "margin",
+          "kind": "let",
+          "description": "margin (px) from viewport top, right, bottom and left.",
+          "type": "{ top?: number, right?: number, buttom?: number, left?: number }",
+          "value": "{}",
           "isFunction": false,
           "isFunctionDeclaration": false,
           "constant": false,

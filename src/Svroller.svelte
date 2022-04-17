@@ -18,6 +18,13 @@
   export let initiallyVisible = false
 
   /**
+   * margin (px) from viewport top, right, bottom and left.
+   *
+   * @type {{ top?: number, right?: number, buttom?: number, left?: number }}
+   */
+  export let margin = {}
+
+  /**
    * @type {(node: HTMLElement, params: any) => import('svelte/transition').TransitionConfig}
    */
   export let vTrackIn = (node) => fade(node, { duration: 100 })
@@ -51,6 +58,7 @@
     {hideAfter}
     {alwaysVisible}
     {initiallyVisible}
+    {margin}
     {vTrackIn}
     {vTrackOut}
     {vThumbIn}

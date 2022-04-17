@@ -28,6 +28,12 @@ export interface SvrollerProps {
   initiallyVisible?: boolean;
 
   /**
+   * margin (px) from viewport top, right, bottom and left.
+   * @default {}
+   */
+  margin?: { top?: number; right?: number; buttom?: number; left?: number };
+
+  /**
    * @default (node) => fade(node, { duration: 100 })
    */
   vTrackIn?: (

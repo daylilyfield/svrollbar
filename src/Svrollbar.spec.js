@@ -11,7 +11,9 @@ class ResizeObserverMock {
   }
 }
 
-window.ResizeObserver = ResizeObserverMock
+beforeEach(() => {
+  window.ResizeObserver = ResizeObserverMock
+})
 
 describe('Svrollbar.svelte', () => {
   it('instanticate component', async () => {
@@ -238,5 +240,28 @@ describe('Svrollbar.svelte', () => {
         contents,
       })
     ).toThrow('window.ResizeObserver is missing.')
+  })
+
+  it('should apply margin', () => {
+    const viewport = document.createElement('div')
+    const contents = document.createElement('div')
+
+    jest.spyOn(viewport, 'scrollHeight', 'get').mockImplementation(() => 200)
+    jest.spyOn(viewport, 'clientHeight', 'get').mockImplementation(() => 100)
+
+    const { container } = render(Svrollbar, {
+      viewport,
+      contents,
+      alwaysVisible: true,
+      margin: { top: 8, right: 16, bottom: 24, left: 32 },
+    })
+
+    const scrollbar = container.querySelector('.v-scrollbar')
+
+    expect(scrollbar).toBeInTheDocument()
+    expect(scrollbar).toHaveStyle({ 'margin-top': '8px' })
+    expect(scrollbar).toHaveStyle({ 'margin-right': '16px' })
+    expect(scrollbar).toHaveStyle({ 'margin-bottom': '24px' })
+    expect(scrollbar).toHaveStyle({ 'margin-left': '32px' })
   })
 })

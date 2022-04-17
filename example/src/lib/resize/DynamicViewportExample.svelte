@@ -6,7 +6,7 @@
   let viewport: HTMLElement
   let contents: HTMLElement
 
-  let height = 10
+  let height = 20
 </script>
 
 <div class="buttons">
