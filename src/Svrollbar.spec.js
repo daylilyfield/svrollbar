@@ -27,6 +27,9 @@ describe('Svrollbar.svelte', () => {
     const viewport = document.createElement('div')
     const contents = document.createElement('div')
 
+    jest.spyOn(viewport, 'scrollHeight', 'get').mockImplementation(() => 200)
+    jest.spyOn(viewport, 'clientHeight', 'get').mockImplementation(() => 100)
+
     const { container } = render(Svrollbar, {
       viewport,
       contents,
@@ -47,6 +50,9 @@ describe('Svrollbar.svelte', () => {
 
     const viewport = document.createElement('div')
     const contents = document.createElement('div')
+
+    jest.spyOn(viewport, 'scrollHeight', 'get').mockImplementation(() => 200)
+    jest.spyOn(viewport, 'clientHeight', 'get').mockImplementation(() => 100)
 
     const { container } = render(Svrollbar, {
       viewport,
@@ -74,6 +80,9 @@ describe('Svrollbar.svelte', () => {
     const viewport = document.createElement('div')
     const contents = document.createElement('div')
 
+    jest.spyOn(viewport, 'scrollHeight', 'get').mockImplementation(() => 200)
+    jest.spyOn(viewport, 'clientHeight', 'get').mockImplementation(() => 100)
+
     const { container } = render(Svrollbar, {
       viewport,
       contents,
@@ -98,6 +107,9 @@ describe('Svrollbar.svelte', () => {
   it('should move contents down by dragging thumb', async () => {
     const viewport = document.createElement('div')
     const contents = document.createElement('div')
+
+    jest.spyOn(viewport, 'scrollHeight', 'get').mockImplementation(() => 200)
+    jest.spyOn(viewport, 'clientHeight', 'get').mockImplementation(() => 100)
 
     const { container } = render(Svrollbar, {
       viewport,
@@ -134,11 +146,14 @@ describe('Svrollbar.svelte', () => {
     expect(removedEvents).toContain('touchend')
   })
 
-  it('should make scrollbar visible with alwaysVisible', async () => {
+  it('should make scrollbar visible with alwaysVisible if contents > viewport', async () => {
     jest.useFakeTimers()
 
     const viewport = document.createElement('div')
     const contents = document.createElement('div')
+
+    jest.spyOn(viewport, 'scrollHeight', 'get').mockImplementation(() => 200)
+    jest.spyOn(viewport, 'clientHeight', 'get').mockImplementation(() => 100)
 
     const { container } = render(Svrollbar, {
       viewport,
@@ -154,6 +169,31 @@ describe('Svrollbar.svelte', () => {
     jest.useRealTimers()
 
     expect(container.querySelector('.v-scrollbar')).toBeInTheDocument()
+  })
+
+  it('should NOT make scrollbar visible with alwaysVisible if contents <= viewport', async () => {
+    jest.useFakeTimers()
+
+    const viewport = document.createElement('div')
+    const contents = document.createElement('div')
+
+    jest.spyOn(viewport, 'scrollHeight', 'get').mockImplementation(() => 100)
+    jest.spyOn(viewport, 'clientHeight', 'get').mockImplementation(() => 100)
+
+    const { container } = render(Svrollbar, {
+      viewport,
+      contents,
+      alwaysVisible: true,
+    })
+
+    await fireEvent.scroll(viewport)
+
+    expect(container.querySelector('.v-scrollbar')).not.toBeInTheDocument()
+
+    jest.advanceTimersByTime(1000)
+    jest.useRealTimers()
+
+    expect(container.querySelector('.v-scrollbar')).not.toBeInTheDocument()
   })
 
   it('should make scrollbar initialy visible with initialyVisible', async () => {
@@ -188,6 +228,9 @@ describe('Svrollbar.svelte', () => {
 
     const viewport = document.createElement('div')
     const contents = document.createElement('div')
+
+    jest.spyOn(viewport, 'scrollHeight', 'get').mockImplementation(() => 200)
+    jest.spyOn(viewport, 'clientHeight', 'get').mockImplementation(() => 100)
 
     expect(
       render.bind(null, Svrollbar, {

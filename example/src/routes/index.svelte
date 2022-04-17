@@ -3,7 +3,6 @@
 
   import { crossfade, fade, scale } from 'svelte/transition'
   import { onMount } from 'svelte'
-  import Svroller from './../../../src/Svroller.svelte'
   import Svrollbar from './../../../src/Svrollbar.svelte'
   import characters from '$lib/characters'
   import DefaultExample from '$lib/simple/DefaultExample.svelte'
@@ -22,6 +21,7 @@
   import DynamicSvrollerExample from '$lib/resize/DynamicSvrollerExample.svelte'
   import VisibilityToggleExample from '$lib/visibility/VisibilityToggleExample.svelte'
   import InitiallyVisibleExample from '$lib/visibility/InitiallyVisibleExample.svelte'
+  import AlwaysVisibleExample from '$lib/visibility/AlwaysVisibleExample.svelte'
 
   const data = characters
 
@@ -87,10 +87,9 @@
   {/if}
 
   <div class="hero">
-    <Svroller width="{width}rem" height="{height}rem" alwaysVisible={true}>
-      <h1>SVROLLBAR</h1>
-      <div class="caption">simple custom scrollbar made by svelte</div>
-    </Svroller>
+    <h1>SVROLLBAR</h1>
+    <div class="caption">simple custom scrollbar made by svelte</div>
+    <div class="svrollbar" />
   </div>
 
   <div class="showcase">
@@ -168,13 +167,15 @@
     <section>
       <h2>Dynamic Visibility Example</h2>
       <div class="examples">
-        <Example name="visibility toggle example">
-          <VisibilityToggleExample {data} />
+        <Example name="always visible example">
+          <AlwaysVisibleExample {data} />
         </Example>
         <Example name="initially visible example">
           <InitiallyVisibleExample {data} />
         </Example>
-        <Example name="" />
+        <Example name="visibility toggle example">
+          <VisibilityToggleExample {data} />
+        </Example>
       </div>
     </section>
   </div>
@@ -186,18 +187,29 @@
   .hero {
     color: #676778;
     background-color: white;
-
-    --svrollbar-thumb-width: 10px;
-    --svrollbar-thumb-background: linear-gradient(45deg, #ec4f27, orange);
-    --svrollbar-thumb-opacity: 1;
+    display: grid;
+    grid-template-areas:
+      'h1 bar'
+      'desc bar';
+    grid-template-columns: auto 1fr;
   }
 
   h1 {
+    grid-area: h1;
     font-size: 2.5rem;
   }
 
   .caption {
+    grid-area: desc;
     font-size: 0.85rem;
+  }
+
+  .hero > .svrollbar {
+    margin: 0 0 0 1rem;
+    width: 10px;
+    grid-area: bar;
+    background: linear-gradient(45deg, #ec4f27, orange);
+    border-radius: 0.25rem;
   }
 
   .showcase {

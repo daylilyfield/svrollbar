@@ -9,11 +9,11 @@
 </script>
 
 <div class="controls">
-  <input id="initially-visible-scrollable" type="checkbox" bind:checked={scrollable} />
-  <label for="initially-visible-scrollable">long contents</label>
+  <input id="always-visible-scrollable" type="checkbox" bind:checked={scrollable} />
+  <label for="always-visible-scrollable">long contents</label>
 </div>
 
-<Svroller width="20rem" height="20rem" initiallyVisible>
+<Svroller width="20rem" height="20rem" alwaysVisible>
   {#if scrollable}
     {#each data as d (d)}
       <div class="item">{d}</div>

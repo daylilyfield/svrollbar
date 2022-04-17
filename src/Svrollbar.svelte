@@ -3,44 +3,65 @@
   import { createEventDispatcher, onDestroy, onMount } from 'svelte'
 
   /**
+   * the scrolling host element.
+   *
    * @type {Element}
    */
   export let viewport
 
   /**
+   * the area scrolled by host element.
+   *
    * @type {Element}
    */
   export let contents
 
   /**
+   * milliseconds to keep scrollbar visible.
+   *
    * @type {number}
    */
   export let hideAfter = 1000
 
   /**
+   * make scrollbar always visible if the content is scrollable.
+   *
    * @type {boolean}
    */
   export let alwaysVisible = false
 
   /**
+   * make scrollbar initially visible if the content is scrollable.
+   *
+   * after you interact with your scrollable contents, scrollbar fallback to the default visibility behavior.
+   *
    * @type {boolean}
    */
   export let initiallyVisible = false
 
   /**
+   * svelte transition to show track in.
+   *
    * @type {(node: HTMLElement, params: any) => import('svelte/transition').TransitionConfig}
    */
   export let vTrackIn = (node) => fade(node, { duration: 100 })
   /**
+   * svelte transition to hide track out.
+   *
    * @type {(node: HTMLElement, params: any) => import('svelte/transition').TransitionConfig}
    */
   export let vTrackOut = (node) => fade(node, { duration: 300 })
 
   /**
+   * svelte transition to show thumb in.
+   *
    * @type {(node: HTMLElement, params: any) => import('svelte/transition').TransitionConfig}
    */
   export let vThumbIn = (node) => fade(node, { duration: 100 })
+
   /**
+   * svelte transition to hide thumb out.
+   *
    * @type {(node: HTMLElement, params: any) => import('svelte/transition').TransitionConfig}
    */
   export let vThumbOut = (node) => fade(node, { duration: 300 })
@@ -72,7 +93,7 @@
   $: thumbTop = (scrollTop / wholeHeight) * trackHeight ?? 0
 
   $: scrollable = wholeHeight > trackHeight
-  $: visible = alwaysVisible || (initiallyVisible && scrollable)
+  $: visible = scrollable && (alwaysVisible || initiallyVisible)
 
   function setupViewport(viewport) {
     if (!viewport) return
@@ -159,7 +180,7 @@
 
   function setupTimer() {
     timer = window.setTimeout(() => {
-      visible = alwaysVisible || (initiallyVisible && !interacted && scrollable) || false
+      visible = (scrollable && (alwaysVisible || (initiallyVisible && !interacted))) || false
       dispatch('hide')
     }, hideAfter)
   }
@@ -172,10 +193,12 @@
   }
 
   function onScroll() {
+    if (!scrollable) return
+
     clearTimer()
     setupTimer()
 
-    visible = alwaysVisible || (initiallyVisible && !interacted && scrollable) || true
+    visible = alwaysVisible || (initiallyVisible && !interacted) || true
     scrollTop = viewport?.scrollTop ?? 0
 
     interacted = true

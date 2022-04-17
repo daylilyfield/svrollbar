@@ -3,11 +3,13 @@ import { SvelteComponentTyped } from "svelte";
 
 export interface SvrollbarProps {
   /**
+   * the 1viewport` is a scrolling host element.
    * @default undefined
    */
   viewport?: Element;
 
   /**
+   * the `contents` is an area scrolled by host element.
    * @default undefined
    */
   contents?: Element;

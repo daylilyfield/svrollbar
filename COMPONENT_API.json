@@ -8,6 +8,7 @@
         {
           "name": "viewport",
           "kind": "let",
+          "description": "the 1viewport` is a scrolling host element.",
           "type": "Element",
           "isFunction": false,
           "isFunctionDeclaration": false,
@@ -17,6 +18,7 @@
         {
           "name": "contents",
           "kind": "let",
+          "description": "the `contents` is an area scrolled by host element.",
           "type": "Element",
           "isFunction": false,
           "isFunctionDeclaration": false,
