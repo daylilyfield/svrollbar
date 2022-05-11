@@ -285,14 +285,14 @@
       bind:this={vTrack}
       class="v-track"
       style="height: {trackHeight}px"
-      in:vTrackIn
-      out:vTrackOut />
+      in:vTrackIn|local
+      out:vTrackOut|local />
     <div
       bind:this={vThumb}
       class="v-thumb"
       style="height: {thumbHeight}px; top: {thumbTop}px"
-      in:vThumbIn
-      out:vThumbOut />
+      in:vThumbIn|local
+      out:vThumbOut|local />
   </div>
 {/if}
 
