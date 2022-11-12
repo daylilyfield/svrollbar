@@ -287,3 +287,50 @@ you can customize scrollbar visibility with `alwaysVisible` and `initiallyVisibl
 | ---------------- | ------- | ------------------------------------ |
 | alwaysVisible    | false   | scrollbar is always visible          |
 | initiallyVisible | false   | scrollbar is visible until scrolling |
+
+## working with absolute divs
+
+the `Observer WebAPI` may not recognize a resize change when working with absolute divs.
+
+you can therefore manually trigger an update calculation, which will update the height of the scrollthumb
+
+```js
+/**
+  * @type {(divElement: HTMLElement | undefined, minScrollHeight: HTMLElement | undefined) => void} 
+  * @param divElement - Will base the new height of this elements scrollheight.
+  * This may be wanted if you're working with absolute divs
+  * @param minScrollHeight - A reference to an element, which makes up for the minimum scrollheight.
+  * (computed: min-height + top,bottom margins + top,bottom border widths)
+*/
+export async function updateHeight(divElement = undefined, minScrollHeight = undefined)
+```
+
+in this example, we transition from *div A* to *div B*.
+
+at the start of the transition, both elements will be absolute, and therefore we trigger an update to the thumb height, so it can transition **with** the contents.<br>
+when the content has finished the transition, the thumb will therefore have smoothly transitioned aswell
+
+the `updateHeight` in the transitionEnd is just a precaution — but should technically not be necessary
+
+```html
+<div class='my-content'>
+  <!-- Using the let: directive for updateHeight function -->
+  <Svroller(width='100%' height='100%' alwaysVisible!='{true}' let:updateHeight)>
+    <MyComponent 
+      on:transitionStart={() => updateHeight(elements.divA, elements.view)} 
+      on:transitionEnd={updateHeight}
+    >
+      <div bind:this={elements.view} class='view' style='position: relative; min-height: 400px;'>
+        <!-- Transitioning to -->
+        <div bind:this={elements.divA} style='position: absolute; left: 500;'>
+        <!-- Transitioning from -->
+        <div bind:this={elements.divB} style='position: absolute; left: 0;'>
+...
+
+<style>
+  .my-content :global .v-thumb {
+    transition: top .25s ease, height .25s ease;
+  }
+...
+
+```
