@@ -1,6 +1,7 @@
+<svelte:options accessors/>
 <script>
   import { fade } from 'svelte/transition'
-  import { createEventDispatcher, onDestroy, onMount } from 'svelte'
+  import { createEventDispatcher, onDestroy, onMount, tick } from 'svelte'
 
   /**
    * the scrolling host element.
@@ -88,6 +89,10 @@
   let windowScrollEnabled = false
   let interacted = false
 
+  let thumbDown = false
+  let thumbResize = false
+  let thumbWheel = false
+
   $: teardownViewport = setupViewport(viewport)
   $: teardownContents = setupContents(contents)
   $: teardownTrack = setupTrack(vTrack)
@@ -104,8 +109,77 @@
   $: thumbHeight = wholeHeight > 0 ? (trackHeight / wholeHeight) * trackHeight : 0
   $: thumbTop = wholeHeight > 0 ? (scrollTop / wholeHeight) * trackHeight : 0
 
+
+
   $: scrollable = wholeHeight > trackHeight
   $: visible = scrollable && (alwaysVisible || initiallyVisible)
+  $: if(!visible) thumbResize = false
+  
+  /** updateHeight variable — ensuring only one while() loop at any given time */
+  let uH = 0
+  /**
+   * @type {(divElement: HTMLElement | undefined, minScrollHeight: HTMLElement | undefined) => void} 
+   * @param divElement - Will base the new height of this elements scrollheight.
+   * This may be wanted if you're working with absolute divs
+   * @param minScrollHeight - A reference to an element, which makes up for the minimum scrollheight.
+   * (computed: min-height + top,bottom margins + top,bottom border widths)
+  */
+  export async function updateHeight(
+    divElement = undefined,
+    minScrollHeight = undefined
+  ) {
+    if(divElement?.nodeType !== Node.ELEMENT_NODE)
+      divElement = undefined
+    
+    // Determining scroll height (basing a minimum height of `minScorllHeight`)
+    wholeHeight = (divElement || viewport).scrollHeight ?? 0
+    if(minScrollHeight) {
+      const computed = getComputedStyle(minScrollHeight)
+      const minHeight =
+        parseFloat(computed.minHeight)
+        + parseFloat(computed.marginTop)
+        + parseFloat(computed.marginBottom)
+        + parseFloat(computed.borderTopWidth)
+        + parseFloat(computed.borderBottomWidth)
+      if(wholeHeight < minHeight)
+        wholeHeight = minHeight
+    }
+    
+	  trackHeight = viewport.clientHeight - (marginTop + marginBottom) ?? 0
+    thumbHeight = wholeHeight > 0 ? (trackHeight / wholeHeight) * trackHeight : 0
+    
+    // Determining scroll position
+    scrollTop = viewport.scrollTop ?? 0
+    const maxScrollTop = wholeHeight - trackHeight
+    if(scrollTop > maxScrollTop)
+      scrollTop = maxScrollTop
+    thumbTop = wholeHeight > 0 ? (scrollTop / wholeHeight) * trackHeight : 0
+    
+    scrollable = wholeHeight > trackHeight
+
+    thumbResize = true
+
+    // This neat trick "saves" the state of the scroll.
+    if(!divElement) {
+      viewport.scrollBy({ top: -1, behavior: 'auto' })
+      await tick()
+      viewport.scrollBy({ top: 1, behavior: 'auto' })
+    }
+
+    if(scrollable) {
+      uH++
+      let _uH = uH
+      // Checking if thumbHeight has »transitioned« to new height
+      let parse = (v) => parseInt(parseFloat(v).toFixed(0))
+      let parsedHeight = parse(thumbHeight)
+      while(parse(getComputedStyle(vThumb).height) != parsedHeight) {
+        await new Promise(r => requestAnimationFrame(r))
+        if(uH != _uH) return
+      }
+      uH = 0
+    }
+    thumbResize = false
+  }
 
   function setupViewport(viewport) {
     if (!viewport) return
@@ -126,8 +200,7 @@
 
     const observer = new ResizeObserver((entries) => {
       for (const _entry of entries) {
-        wholeHeight = viewport?.scrollHeight ?? 0
-        trackHeight = viewport?.clientHeight - (marginTop + marginBottom) ?? 0
+        updateHeight()
       }
     })
 
@@ -206,6 +279,7 @@
 
   function onScroll() {
     if (!scrollable) return
+    if (thumbDown) return
 
     clearTimer()
     setupTimer()
@@ -213,6 +287,7 @@
     visible = alwaysVisible || (initiallyVisible && !interacted) || true
     scrollTop = viewport?.scrollTop ?? 0
 
+    thumbWheel = true
     interacted = true
 
     dispatch('show')
@@ -229,7 +304,9 @@
 
   function onThumbDown(event) {
     event.stopPropagation()
-    event.preventDefault()
+
+    thumbDown = true
+    thumbWheel = false
 
     startTop = viewport.scrollTop
     startY = event.changedTouches ? event.changedTouches[0].clientY : event.clientY
@@ -253,6 +330,8 @@
   function onThumbUp(event) {
     event.stopPropagation()
     event.preventDefault()
+
+    thumbDown = false
 
     startTop = 0
     startY = 0
@@ -292,7 +371,11 @@
       class="v-thumb"
       style="height: {thumbHeight}px; top: {thumbTop}px"
       in:vThumbIn
-      out:vThumbOut />
+      out:vThumbOut
+    class:down={thumbDown}
+    class:wheel={thumbWheel}
+    class:resize={thumbResize}
+  />
   </div>
 {/if}
 

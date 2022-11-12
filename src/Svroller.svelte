@@ -1,3 +1,4 @@
+<svelte:options accessors/>
 <script>
   import { fade } from 'svelte/transition'
   import Svrollbar from './Svrollbar.svelte'
@@ -44,15 +45,20 @@
 
   let viewport
   let contents
+  
+  export let svrollbar
+  /** @type {(divElement: HTMLElement | undefined, minScrollHeight: HTMLElement | undefined) => void} */
+  export const updateHeight = async (...args) => svrollbar.updateHeight(...args)
 </script>
 
 <div class="svlr-wrapper" style="width: {width}; height: {height}">
   <div bind:this={viewport} class="svlr-viewport" style="width: {width}; height: {height}">
     <div bind:this={contents} class="svlr-contents">
-      <slot />
+      <slot {updateHeight} />
     </div>
   </div>
   <Svrollbar
+    bind:this={svrollbar}
     {viewport}
     {contents}
     {hideAfter}
