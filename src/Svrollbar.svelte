@@ -42,7 +42,7 @@
   /**
    * margin (px) from viewport top, right, bottom and left.
    *
-   * @type {{ top?: number, right?: number, buttom?: number, left?: number }}
+   * @type {{ top?: number, right?: number, bottom?: number, left?: number }}
    */
   export let margin = {}
 
