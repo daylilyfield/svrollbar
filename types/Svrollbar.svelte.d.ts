@@ -38,7 +38,7 @@ export interface SvrollbarProps {
    * margin (px) from viewport top, right, bottom and left.
    * @default {}
    */
-  margin?: { top?: number; right?: number; buttom?: number; left?: number };
+  margin?: { top?: number; right?: number; bottom?: number; left?: number };
 
   /**
    * svelte transition to show track in.
