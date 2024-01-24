@@ -31,7 +31,7 @@ export interface SvrollerProps {
    * margin (px) from viewport top, right, bottom and left.
    * @default {}
    */
-  margin?: { top?: number; right?: number; buttom?: number; left?: number };
+  margin?: { top?: number; right?: number; bottom?: number; left?: number };
 
   /**
    * @default (node) => fade(node, { duration: 100 })
